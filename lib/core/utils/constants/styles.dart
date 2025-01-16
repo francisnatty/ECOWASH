@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-abstract class AppTextStyles {
-  static const TextStyle materialThemeDisplayLarge = TextStyle(
-    fontSize: 57,
+class AppTextStyles {
+  static TextStyle displayLarge = TextStyle(
+    fontSize: 57.sp,
     fontWeight: FontWeight.w400,
     fontFamily: "IBM Plex Sans",
     height: 1.12,
@@ -11,8 +12,8 @@ abstract class AppTextStyles {
     decoration: TextDecoration.none,
   );
 
-  static const TextStyle materialThemeDisplayMedium = TextStyle(
-    fontSize: 45,
+  static TextStyle displayMedium = TextStyle(
+    fontSize: 45.sp,
     fontWeight: FontWeight.w400,
     fontFamily: "IBM Plex Sans",
     height: 1.16,
@@ -20,8 +21,8 @@ abstract class AppTextStyles {
     decoration: TextDecoration.none,
   );
 
-  static const TextStyle materialThemeDisplaySmall = TextStyle(
-    fontSize: 36,
+  static TextStyle displaySmall = TextStyle(
+    fontSize: 36.sp,
     fontWeight: FontWeight.w400,
     fontFamily: "IBM Plex Sans",
     height: 1.22,
@@ -29,8 +30,8 @@ abstract class AppTextStyles {
     decoration: TextDecoration.none,
   );
 
-  static const TextStyle materialThemeHeadlineLarge = TextStyle(
-    fontSize: 32,
+  static TextStyle headlineLarge = TextStyle(
+    fontSize: 32.sp,
     fontWeight: FontWeight.w400,
     fontFamily: "IBM Plex Sans",
     height: 1.25,
@@ -38,8 +39,8 @@ abstract class AppTextStyles {
     decoration: TextDecoration.none,
   );
 
-  static const TextStyle materialThemeHeadlineMedium = TextStyle(
-    fontSize: 28,
+  static TextStyle headlineMedium = TextStyle(
+    fontSize: 28.sp,
     fontWeight: FontWeight.w400,
     fontFamily: "IBM Plex Sans",
     height: 1.29,
@@ -47,8 +48,8 @@ abstract class AppTextStyles {
     decoration: TextDecoration.none,
   );
 
-  static const TextStyle materialThemeHeadlineSmall = TextStyle(
-    fontSize: 24,
+  static TextStyle headlineSmall = TextStyle(
+    fontSize: 24.sp,
     fontWeight: FontWeight.w700,
     fontFamily: "IBM Plex Sans",
     height: 1.33,
@@ -56,8 +57,8 @@ abstract class AppTextStyles {
     decoration: TextDecoration.none,
   );
 
-  static const TextStyle materialThemeBodyLarge = TextStyle(
-    fontSize: 16,
+  static TextStyle bodyLarge = TextStyle(
+    fontSize: 16.sp,
     fontWeight: FontWeight.w400,
     fontFamily: "Lato",
     height: 1.5,
@@ -66,8 +67,8 @@ abstract class AppTextStyles {
     decoration: TextDecoration.none,
   );
 
-  static const TextStyle materialThemeBodyMedium = TextStyle(
-    fontSize: 14,
+  static TextStyle bodyMedium = TextStyle(
+    fontSize: 14.sp,
     fontWeight: FontWeight.w400,
     fontFamily: "Lato",
     height: 1.43,
@@ -76,8 +77,8 @@ abstract class AppTextStyles {
     decoration: TextDecoration.none,
   );
 
-  static const TextStyle materialThemeBodySmall = TextStyle(
-    fontSize: 12,
+  static TextStyle bodySmall = TextStyle(
+    fontSize: 12.sp,
     fontWeight: FontWeight.w400,
     fontFamily: "Lato",
     height: 1.33,
@@ -86,8 +87,8 @@ abstract class AppTextStyles {
     decoration: TextDecoration.none,
   );
 
-  static const TextStyle materialThemeBodySmaller = TextStyle(
-    fontSize: 10,
+  static TextStyle bodySmaller = TextStyle(
+    fontSize: 10.sp,
     fontWeight: FontWeight.w400,
     fontFamily: "Lato",
     height: 1.4,
@@ -95,8 +96,8 @@ abstract class AppTextStyles {
     decoration: TextDecoration.none,
   );
 
-  static const TextStyle materialThemeBodySmallest = TextStyle(
-    fontSize: 8,
+  static TextStyle bodySmallest = TextStyle(
+    fontSize: 8.sp,
     fontWeight: FontWeight.w400,
     fontFamily: "Lato",
     height: 1.56,
@@ -104,8 +105,8 @@ abstract class AppTextStyles {
     decoration: TextDecoration.none,
   );
 
-  static const TextStyle materialThemeLabelLarge = TextStyle(
-    fontSize: 14,
+  static TextStyle labelLarge = TextStyle(
+    fontSize: 14.sp,
     fontWeight: FontWeight.w500,
     fontFamily: "Lato",
     height: 1.43,
@@ -114,8 +115,8 @@ abstract class AppTextStyles {
     decoration: TextDecoration.none,
   );
 
-  static const TextStyle materialThemeLabelMedium = TextStyle(
-    fontSize: 12,
+  static TextStyle labelMedium = TextStyle(
+    fontSize: 12.sp,
     fontWeight: FontWeight.w500,
     fontFamily: "Lato",
     height: 1.33,
@@ -124,8 +125,8 @@ abstract class AppTextStyles {
     decoration: TextDecoration.none,
   );
 
-  static const TextStyle materialThemeLabelSmall = TextStyle(
-    fontSize: 11,
+  static TextStyle labelSmall = TextStyle(
+    fontSize: 11.sp,
     fontWeight: FontWeight.w500,
     fontFamily: "Lato",
     height: 1.45,
@@ -134,8 +135,8 @@ abstract class AppTextStyles {
     decoration: TextDecoration.none,
   );
 
-  static const TextStyle materialThemeLabelSmaller = TextStyle(
-    fontSize: 8,
+  static TextStyle labelSmaller = TextStyle(
+    fontSize: 8.sp,
     fontWeight: FontWeight.w500,
     fontFamily: "Lato",
     height: 1.5,
@@ -143,17 +144,17 @@ abstract class AppTextStyles {
     decoration: TextDecoration.none,
   );
 
-  static const TextStyle materialThemeTitleLarge = TextStyle(
-    fontSize: 22,
+  static TextStyle titleLarge = TextStyle(
+    fontSize: 22.sp,
     fontWeight: FontWeight.w700,
-    fontFamily: "IBM Plex Sans",
+    // fontFamily: "IBM Plex Sans",
     height: 1.27,
     fontStyle: FontStyle.normal,
     decoration: TextDecoration.none,
   );
 
-  static const TextStyle materialThemeTitleInbetween = TextStyle(
-    fontSize: 20,
+  static TextStyle titleInbetween = TextStyle(
+    fontSize: 20.sp,
     fontWeight: FontWeight.w700,
     fontFamily: "IBM Plex Sans",
     height: 1.3,
@@ -161,8 +162,8 @@ abstract class AppTextStyles {
     decoration: TextDecoration.none,
   );
 
-  static const TextStyle materialThemeTitleMedium = TextStyle(
-    fontSize: 16,
+  static TextStyle titleMedium = TextStyle(
+    fontSize: 16.sp,
     fontWeight: FontWeight.w700,
     fontFamily: "IBM Plex Sans",
     height: 1.5,
@@ -171,8 +172,8 @@ abstract class AppTextStyles {
     decoration: TextDecoration.none,
   );
 
-  static const TextStyle materialThemeTitleSmall = TextStyle(
-    fontSize: 14,
+  static TextStyle titleSmall = TextStyle(
+    fontSize: 14.sp,
     fontWeight: FontWeight.w700,
     fontFamily: "IBM Plex Sans",
     height: 1.43,
