@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../utils/constants/app_constants.dart';
+
 class AppButtons {
   static Widget primary({
     required VoidCallback onPressed,
@@ -15,9 +17,9 @@ class AppButtons {
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           padding: EdgeInsets.zero,
-          backgroundColor: Colors.amber,
+          backgroundColor: AppColors.primary,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10.r),
           ),
         ),
         child: Center(
