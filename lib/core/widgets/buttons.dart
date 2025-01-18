@@ -10,6 +10,8 @@ class AppButtons {
     double? height,
     double? width,
     TextStyle? textStyle,
+    Color? bgColor,
+    Color? textColor,
   }) {
     return SizedBox(
       width: width ?? double.infinity,
@@ -18,7 +20,7 @@ class AppButtons {
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           padding: EdgeInsets.zero,
-          backgroundColor: AppColors.primary,
+          backgroundColor: bgColor ?? AppColors.primary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.r),
           ),
@@ -28,7 +30,7 @@ class AppButtons {
             title,
             style: textStyle ??
                 TextStyle(
-                  color: Colors.white,
+                  color: textColor ?? Colors.white,
                   fontWeight: FontWeight.w400,
                   fontSize: 14.sp,
                 ),

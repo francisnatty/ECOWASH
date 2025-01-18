@@ -9,6 +9,9 @@ class AppIcons {
   static const String backIcon = '${_path}back_icon.svg';
   static const String clock = '${_path}clock.svg';
   static const String rating = '${_path}rating.svg';
+  static const String addIcon = '${_path}add_icon.svg';
+  static const String cartBag = '${_path}cart_bag.svg';
+  static const String favourite = '${_path}favourite.svg';
 }
 
 class AppImages {
