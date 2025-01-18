@@ -1,9 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:ecowash/core/utils/utils.dart';
+import 'package:ecowash/features/app/presentation/pages/laundry/screens/laundry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:ecowash/core/utils/constants/app_constants.dart';
 import 'package:ecowash/core/widgets/wwidgets.dart';
+
+import 'widgets/discount_widget.dart';
 
 class DashboardSc extends StatefulWidget {
   const DashboardSc({super.key});
@@ -65,7 +69,7 @@ class _DashboardScState extends State<DashboardSc> {
     return Scaffold(
       backgroundColor: AppColors.materialThemeWhite,
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: AppPaddings.all16,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,30 +139,35 @@ class _DashboardScState extends State<DashboardSc> {
                   ),
                   itemCount: items.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      height: itemHeight,
-                      decoration: BoxDecoration(
-                          color: items[index].bgColor,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 50.h,
-                            width: 50.w,
-                            child: Image.asset(
-                              items[index].image,
-                              fit: BoxFit.cover,
+                    return InkWell(
+                      onTap: () {
+                        goTo(context: context, newScreen: LaundryScreen());
+                      },
+                      child: Container(
+                        height: itemHeight,
+                        decoration: BoxDecoration(
+                            color: items[index].bgColor,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 50.h,
+                              width: 50.w,
+                              child: Image.asset(
+                                items[index].image,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
-                          const Hspacing(height: 20),
-                          Text(
-                            items[index].title,
-                            style: AppTextStyles.labelMedium.copyWith(
-                              color: items[index].textColor,
-                            ),
-                          )
-                        ],
+                            const Hspacing(height: 20),
+                            Text(
+                              items[index].title,
+                              style: AppTextStyles.labelMedium.copyWith(
+                                color: items[index].textColor,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -168,79 +177,52 @@ class _DashboardScState extends State<DashboardSc> {
 
               //  Image.asset(AppImages.containerBG),
 
-              Container(
-                height: 170.h,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: const DecorationImage(
-                    image: AssetImage(
-                      AppImages.containerBG,
-                    ), // Your image path here
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    // Overlay Color
-                    Container(
-                      //   padding: AppPaddings.all10,
-                      decoration: BoxDecoration(
-                        color: AppColors.primary.withOpacity(0.7),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    // Texts and Button
-                    Padding(
-                      padding: AppPaddings.all10,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('QT-Laundry Services',
-                              style: AppTextStyles.titleSmall.copyWith(
-                                color: AppColors.materialThemeWhite,
-                              )),
-                          const Hspacing(height: 5),
-                          Row(
-                            children: [
-                              Text('35%',
-                                  style: AppTextStyles.headlineLarge.copyWith(
-                                    color: AppColors.primaryContainer,
-                                  )),
-                              Text(
-                                'OFF',
-                                style: AppTextStyles.bodyMedium.copyWith(
-                                  color: AppColors.primaryContainer,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Text(
-                            'On your first order',
-                            style: AppTextStyles.bodyMedium.copyWith(
-                              color: AppColors.primaryContainer,
-                            ),
-                          ),
-                          const Hspacing(height: 8),
-                          AppButtons.primary(
-                            height: 32.h,
-                            width: 151.w,
-                            onPressed: () {},
-                            title: 'Claim',
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              const DashboardDiscountWidget(),
               const Hspacing(height: 15),
               Text(
                 'Near you',
                 style: AppTextStyles.titleSmall,
               ),
+
+              const Hspacing(height: 15),
+
+              SizedBox(
+                height: 120.h,
+                child: ListView.builder(
+                    itemCount: 5,
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                          right: 20,
+                        ),
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              radius: 40.r,
+                              backgroundImage: const AssetImage(
+                                AppImages.laundryShop,
+                              ),
+                            ),
+                            const Hspacing(height: 10),
+                            Row(
+                              children: [
+                                const SvgIcon(
+                                  icon: AppIcons.laundry,
+                                ),
+                                // const Wspacing(width: 5),
+                                Text(
+                                  'LAUNDRY',
+                                  style: AppTextStyles.labelSmaller,
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      );
+                    }),
+              )
 
               // AppButtons.primary(
               //   onPressed: () {},

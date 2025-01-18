@@ -9,6 +9,7 @@ class AppButtons {
     required String title,
     double? height,
     double? width,
+    TextStyle? textStyle,
   }) {
     return SizedBox(
       width: width ?? double.infinity,
@@ -25,11 +26,12 @@ class AppButtons {
         child: Center(
           child: Text(
             title,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w700,
-              fontSize: 14.sp,
-            ),
+            style: textStyle ??
+                TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14.sp,
+                ),
           ),
         ),
       ),

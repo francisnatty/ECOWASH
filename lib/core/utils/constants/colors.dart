@@ -17,9 +17,11 @@ abstract class AppColors {
   static const Color surfaceContainer = Color(0xffEBEFF3);
   static const Color secondaryFixedDim = Color(0xff98CCF9);
   static const Color onSecondaryContainer = Color(0xff001E31);
+  static const Color secondary = Color(0xff0096E0);
   static const Color onErrorContainer = Color(0xff3B0908);
   static const Color onPrimaryContainer = Color(0xff002204);
 
   static const Color onSecondaryFixedVariant = Color(0xff064B72);
+  static const Color surfaceContainerLow = Color(0xffF0F4F8);
 }
 // Schemes/On Secondary Fixed Variant
