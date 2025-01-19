@@ -1,3 +1,4 @@
+import 'package:ecowash/features/app/presentation/pages/cart/screens/cart_profile.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/utils/utils.dart';
@@ -66,7 +67,9 @@ class CartWidget extends StatelessWidget {
             const Wspacing(width: 10),
             Expanded(
               child: AppButtons.primary(
-                onPressed: () {},
+                onPressed: () {
+                  goTo(context: context, newScreen: const CartProfile());
+                },
                 title: 'Checkout',
               ),
             ),

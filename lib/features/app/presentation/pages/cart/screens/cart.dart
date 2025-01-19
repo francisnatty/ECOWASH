@@ -18,9 +18,9 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   List<String> tabs = ['Cart', 'Active', 'Completed'];
   List<Widget> screens = [
-    CartTab(),
-    ActiveTab(),
-    CompletedTab(),
+    const CartTab(),
+    const ActiveTab(),
+    const CompletedTab(),
   ];
   int tabIndex = 0;
   @override

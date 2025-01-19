@@ -15,6 +15,7 @@ class AppIcons {
   static const String deleteIcon = '${_path}delete_icon.svg';
   static const String boxIcon = '${_path}box_icon.svg';
   static const String plusIcon = '${_path}plus_icon.svg';
+  static const String minusIcon = '${_path}minus_icon.svg';
 }
 
 class AppImages {
