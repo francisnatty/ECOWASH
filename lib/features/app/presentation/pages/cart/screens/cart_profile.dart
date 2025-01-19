@@ -1,8 +1,11 @@
 import 'package:ecowash/core/utils/utils.dart';
 import 'package:ecowash/core/widgets/wwidgets.dart';
+import 'package:ecowash/features/app/presentation/pages/cart/screens/cart_checkout.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../widgets/add_remove_widget.dart';
 
 class CartProfile extends StatelessWidget {
   const CartProfile({super.key});
@@ -142,81 +145,15 @@ class CartProfile extends StatelessWidget {
                 textStyle: AppTextStyles.titleMedium.copyWith(
                   color: AppColors.outline,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  goTo(context: context, newScreen: CartCheckout());
+                },
                 title: 'Proceed',
               ),
             ),
           ),
         ],
       )),
-    );
-  }
-}
-
-class AddAndRemoveItemWidget extends StatelessWidget {
-  const AddAndRemoveItemWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: AppPaddings.all16,
-      decoration: BoxDecoration(
-          color: AppColors.surface, borderRadius: BorderRadius.circular(10)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'T-Shirt',
-                style: AppTextStyles.titleSmall,
-              ),
-              Row(
-                children: [
-                  Text(
-                    'N',
-                    style: AppTextStyles.bodySmaller.copyWith(
-                      color: AppColors.onSurface,
-                    ),
-                  ),
-                  Text(
-                    '500.00',
-                    style: AppTextStyles.labelLarge.copyWith(
-                      color: AppColors.onSurface,
-                      // fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Text(
-                    ' Per Pcs',
-                    style: AppTextStyles.bodySmaller.copyWith(
-                      color: AppColors.onSurface,
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
-          Row(
-            children: [
-              const SvgIcon(icon: AppIcons.minusIcon),
-              const Wspacing(width: 7),
-              Text(
-                '1',
-                style: AppTextStyles.labelLarge.copyWith(
-                  color: AppColors.onSurface,
-                ),
-              ),
-              const Wspacing(width: 7),
-              const SvgIcon(icon: AppIcons.plusIcon),
-              const Wspacing(width: 10),
-              const SvgIcon(icon: AppIcons.deleteIcon),
-            ],
-          )
-        ],
-      ),
     );
   }
 }

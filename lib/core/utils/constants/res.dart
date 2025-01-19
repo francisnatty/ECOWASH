@@ -16,6 +16,9 @@ class AppIcons {
   static const String boxIcon = '${_path}box_icon.svg';
   static const String plusIcon = '${_path}plus_icon.svg';
   static const String minusIcon = '${_path}minus_icon.svg';
+  static const String cancel = '${_path}cancel.svg';
+  static const String edit = '${_path}edit.svg';
+  static const String tele = '${_path}tele.svg';
 }
 
 class AppImages {
