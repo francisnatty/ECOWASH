@@ -24,5 +24,7 @@ abstract class AppColors {
   static const Color onSecondaryFixedVariant = Color(0xff064B72);
   static const Color surfaceContainerLow = Color(0xffF0F4F8);
   static const Color outline = Color(0xff717972);
+  static const Color error = Color(0xffE02A1A);
+  static const Color tertiary = Color(0xff009558);
 }
 // Schemes/On Secondary Fixed Variant

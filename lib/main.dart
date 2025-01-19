@@ -1,4 +1,4 @@
-import 'package:ecowash/features/app/presentation/pages/dashboard/dashboard.dart';
+import 'package:ecowash/features/app/presentation/pages/cart/screens/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
-            home: const DashboardSc(),
+            home: const CartScreen(),
           );
         });
   }

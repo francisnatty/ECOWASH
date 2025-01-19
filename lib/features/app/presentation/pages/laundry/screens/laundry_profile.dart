@@ -1,10 +1,13 @@
 import 'package:ecowash/core/utils/utils.dart';
 import 'package:ecowash/core/widgets/wwidgets.dart';
+import 'package:ecowash/features/app/presentation/pages/laundry/widgets/reviews_tab.dart';
+import 'package:ecowash/features/app/presentation/pages/laundry/widgets/service_tab.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../widgets/add_item_widget.dart';
+import '../widgets/product_tab.dart';
 
 class LaundryProfile extends StatefulWidget {
   const LaundryProfile({super.key});
@@ -21,6 +24,12 @@ class _LaundryProfileState extends State<LaundryProfile> {
     'Services',
     'Product',
     'Reviews',
+  ];
+
+  List<Widget> tabScreens = [
+    ServiceTab(),
+    ProductTab(),
+    ReviewsTab(),
   ];
 
   @override
@@ -41,11 +50,11 @@ class _LaundryProfileState extends State<LaundryProfile> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SvgIcon(icon: AppIcons.backIcon),
+                  const SvgIcon(icon: AppIcons.backIcon),
                   Row(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(2),
+                        padding: const EdgeInsets.all(2),
                         height: 24.h,
                         width: 24.w,
                         decoration: BoxDecoration(
@@ -263,19 +272,7 @@ class _LaundryProfileState extends State<LaundryProfile> {
                   );
                 }),
               ),
-              Expanded(
-                child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, // 2 items per row
-                      crossAxisSpacing: 10,
-                      // mainAxisSpacing: 10,
-                    ),
-                    itemCount: 10, // Replace with your actual item count
-                    itemBuilder: (context, index) {
-                      return const AddItemWidget();
-                    }),
-              ),
+              Expanded(child: tabScreens[tabIndex]),
             ],
           ),
         ),
