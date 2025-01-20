@@ -1,3 +1,4 @@
+import 'package:ecowash/core/utils/constants/app_texts.dart';
 import 'package:ecowash/core/utils/utils.dart';
 import 'package:ecowash/core/widgets/wwidgets.dart';
 import 'package:ecowash/features/app/presentation/pages/laundry/widgets/reviews_tab.dart';
@@ -149,7 +150,7 @@ class _LaundryProfileState extends State<LaundryProfile> {
                           icon: AppIcons.clock,
                         ),
                         Text(
-                          ' 8.00Am-09:00Pm',
+                          ' 8.00AM-09:00PM',
                           style: AppTextStyles.labelSmall.copyWith(
                             color: AppColors.onSurface,
                           ),
@@ -168,17 +169,25 @@ class _LaundryProfileState extends State<LaundryProfile> {
               ),
               const Hspacing(height: 10),
               Text(
-                'Torem ipsum dolor sit amet,consectetur',
+                AppTexts.dummyDescription,
                 style: AppTextStyles.bodySmall.copyWith(
                   color: AppColors.onSurfaceVariant,
                 ),
               ),
               const Hspacing(height: 10),
+              // AppButtons.primary(
+              //   bgColor: AppColors.surfaceContainer,
+              //   textStyle: AppTextStyles.titleMedium.copyWith(
+              //     color: AppColors.outline,
+              //   ),
+              //   onPressed: () {},
+              //   title: 'Enjoy Subscription',
+              // ),
               AppButtons.primary(
-                bgColor: AppColors.surfaceContainer,
-                textStyle: AppTextStyles.titleMedium.copyWith(
-                  color: AppColors.outline,
-                ),
+                bgColor: AppColors.primary,
+                // textStyle: AppTextStyles.titleMedium.copyWith(
+                //   color: AppColors.outline,
+                // ),
                 onPressed: () {},
                 title: 'Enjoy Subscription',
               ),
@@ -190,45 +199,48 @@ class _LaundryProfileState extends State<LaundryProfile> {
                 style: AppTextStyles.titleSmall,
               ),
               const Hspacing(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: List.generate(services.length, (index) {
-                  return InkWell(
-                    onTap: () {
-                      setState(() {
-                        serviceIndex = index;
-                      });
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: 2.w,
-                        right: 2.w,
-                      ),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 7.h,
-                          horizontal: 15.w,
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: List.generate(services.length, (index) {
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          serviceIndex = index;
+                        });
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          left: 2.w,
+                          right: 2.w,
                         ),
-                        decoration: BoxDecoration(
-                            color: AppColors.secondaryContainer,
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(
-                              color: serviceIndex == index
-                                  ? AppColors.onSecondaryContainer
-                                  : Colors.transparent,
-                            )),
-                        child: Center(
-                          child: Text(
-                            services[index],
-                            style: AppTextStyles.labelMedium.copyWith(
-                              color: AppColors.onSurface,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 7.h,
+                            horizontal: 15.w,
+                          ),
+                          decoration: BoxDecoration(
+                              color: AppColors.secondaryContainer,
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.all(
+                                color: serviceIndex == index
+                                    ? AppColors.onSecondaryContainer
+                                    : Colors.transparent,
+                              )),
+                          child: Center(
+                            child: Text(
+                              services[index],
+                              style: AppTextStyles.labelMedium.copyWith(
+                                color: AppColors.onSurface,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  );
-                }),
+                    );
+                  }),
+                ),
               ),
               const Hspacing(height: 15),
               Row(

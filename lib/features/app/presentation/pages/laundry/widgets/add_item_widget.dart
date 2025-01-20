@@ -12,8 +12,8 @@ class AddItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 174.w,
-      padding: AppPaddings.all16,
+      // width: 174.w,
+      padding: AppPaddings.all4,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

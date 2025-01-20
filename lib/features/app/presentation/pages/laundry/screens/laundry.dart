@@ -59,45 +59,48 @@ class _LaundryScreenState extends State<LaundryScreen> {
                 iconPath: AppIcons.search,
               ),
               const Hspacing(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: List.generate(tabs.length, (index) {
-                  return InkWell(
-                    onTap: () {
-                      setState(() {
-                        tabIndex = index;
-                      });
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: 2.w,
-                        right: 2.w,
-                      ),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 7.h,
-                          horizontal: 15.w,
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: List.generate(tabs.length, (index) {
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          tabIndex = index;
+                        });
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          left: 2.w,
+                          right: 2.w,
                         ),
-                        decoration: BoxDecoration(
-                            color: AppColors.secondaryContainer,
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(
-                              color: tabIndex == index
-                                  ? AppColors.onSecondaryContainer
-                                  : Colors.transparent,
-                            )),
-                        child: Center(
-                          child: Text(
-                            tabs[index],
-                            style: AppTextStyles.labelMedium.copyWith(
-                              color: AppColors.onSurface,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 7.h,
+                            horizontal: 15.w,
+                          ),
+                          decoration: BoxDecoration(
+                              color: AppColors.secondaryContainer,
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.all(
+                                color: tabIndex == index
+                                    ? AppColors.onSecondaryContainer
+                                    : Colors.transparent,
+                              )),
+                          child: Center(
+                            child: Text(
+                              tabs[index],
+                              style: AppTextStyles.labelMedium.copyWith(
+                                color: AppColors.onSurface,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  );
-                }),
+                    );
+                  }),
+                ),
               ),
               const Hspacing(height: 20),
               Text(

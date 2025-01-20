@@ -28,6 +28,13 @@ class AppIcons {
 
   static const String history = '${_path}history.svg';
   static const String eye = '${_path}eye.svg';
+
+  static const String dropIcon = '${_path}drop_icon.svg';
+  static const String gogle = '${_path}google.svg';
+  static const String apple = '${_path}apple.svg';
+
+  static const String testHeader = '${_path}test_header.svg';
+  static const String testFooter = '${_path}test_footer.svg';
 }
 
 class AppImages {
@@ -42,4 +49,8 @@ class AppImages {
   static const String laundryShop = '${_path}laundry-shop.jpeg';
   static const String clothes = '${_path}clothes.png';
   static const String weQuickPayLogo = '${_path}weQuickPayLogo.png';
+
+  static const String ecowashLogo = '${_path}ecowash_logo.png';
+  static const String pressingIron = '${_path}pressing_iron.png';
+  static const String walletBg = '${_path}wallet_bg.jpg';
 }

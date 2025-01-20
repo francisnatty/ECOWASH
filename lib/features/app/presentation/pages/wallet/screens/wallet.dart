@@ -25,22 +25,28 @@ class _WalletScState extends State<WalletSc> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Align(
-                alignment: Alignment.centerRight,
-                child: SvgIcon(
-                  icon: AppIcons.plusIcon,
-                  onPressed: () {},
-                ),
-              ),
+              // Align(
+              //   alignment: Alignment.centerRight,
+              //   child: SvgIcon(
+              //     icon: AppIcons.plusIcon,
+              //     onPressed: () {},
+              //   ),
+              // ),
               const Hspacing(height: 35),
               Container(
                 padding: AppPaddings.all10,
                 height: 171.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: AppColors.onPrimaryContainer,
-                ),
+                    borderRadius: BorderRadius.circular(12),
+                    image: const DecorationImage(
+                      image: AssetImage(
+                        AppImages.walletBg,
+                      ),
+                      fit: BoxFit.cover,
+                    )
+                    // color: AppColors.onPrimaryContainer,
+                    ),
                 child: Column(
                   children: [
                     Text(
@@ -181,7 +187,7 @@ class SelectionContainerWidget extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        height: 44.h,
+        // height: 44.h,
         padding: AppPaddings.all10,
         decoration: BoxDecoration(
           color: bgColor ?? AppColors.secondaryContainer,
@@ -189,11 +195,13 @@ class SelectionContainerWidget extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SvgIcon(
               icon: icon,
               iconColor: textColor ?? AppColors.onSecondaryContainer,
             ),
+            const Wspacing(width: 3),
             Text(
               title,
               style: AppTextStyles.bodyLarge.copyWith(

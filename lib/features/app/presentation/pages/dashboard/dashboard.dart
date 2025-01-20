@@ -80,12 +80,29 @@ class _DashboardScState extends State<DashboardSc> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Current Location',
-                        style: AppTextStyles.bodySmaller.copyWith(
-                          color: AppColors.onSurfaceVariant,
+                      Padding(
+                        padding: EdgeInsets.only(left: 3.w),
+                        child: Text(
+                          'Current Location',
+                          style: AppTextStyles.bodySmaller.copyWith(
+                            color: AppColors.onSurfaceVariant,
+                          ),
                         ),
                       ),
+                      Row(
+                        children: [
+                          const SvgIcon(icon: AppIcons.location),
+                          const Wspacing(width: 3),
+                          Text(
+                            'Kaduna,Nigeria',
+                            style: AppTextStyles.labelMedium.copyWith(
+                                color: AppColors.onSurface,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          const Wspacing(width: 3),
+                          const SvgIcon(icon: AppIcons.dropIcon),
+                        ],
+                      )
                     ],
                   ),
                   const SvgIcon(
@@ -112,10 +129,10 @@ class _DashboardScState extends State<DashboardSc> {
                       iconPath: AppIcons.search,
                     ),
                   ),
-                  const Wspacing(width: 10),
-                  const SvgIcon(
-                    // height: 44.h,
-                    // width: 44.h,
+                  const Wspacing(width: 5),
+                  SvgIcon(
+                    height: 50.h,
+                    width: 50.h,
                     icon: AppIcons.filter,
                   )
                 ],

@@ -1,11 +1,7 @@
-import 'package:ecowash/core/utils/constants/styles.dart';
-import 'package:ecowash/core/widgets/spacing.dart';
-import 'package:ecowash/core/widgets/textfields.dart';
 import 'package:ecowash/features/app/presentation/pages/cart/widgets/payment_option.dart';
 import 'package:ecowash/features/app/presentation/pages/wallet/widgets/saved_accounts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../../core/utils/utils.dart';
 import '../../../../../../core/widgets/wwidgets.dart';
 
@@ -18,13 +14,15 @@ class TopUp extends StatefulWidget {
 
 class _TopUpState extends State<TopUp> {
   TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: Stack(
           children: [
-            Padding(
+            // Main content
+            SingleChildScrollView(
               padding: AppPaddings.all16,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +62,6 @@ class _TopUpState extends State<TopUp> {
                       color: AppColors.onSurface,
                     ),
                   ),
-
                   TextFields.normalTextField(
                     hintText: 'Amount',
                     controller: controller,
@@ -79,11 +76,9 @@ class _TopUpState extends State<TopUp> {
                           color: AppColors.surfaceContainer,
                           borderRadius: BorderRadius.circular(6),
                         ),
-                        padding: EdgeInsets.only(
-                          top: 10.h,
-                          bottom: 10.w,
-                          left: 8.w,
-                          right: 8.w,
+                        padding: EdgeInsets.symmetric(
+                          vertical: 10.h,
+                          horizontal: 8.w,
                         ),
                         child: Text(
                           'N100.00',
@@ -101,7 +96,6 @@ class _TopUpState extends State<TopUp> {
                       color: AppColors.onPrimaryContainer,
                     ),
                   ),
-                  // const Hspacing(height: 20),
                   const SavedAccountWidget(),
                   const Hspacing(height: 20),
                   Text(
@@ -115,20 +109,25 @@ class _TopUpState extends State<TopUp> {
                 ],
               ),
             ),
-            const Spacer(),
-            Container(
-              color: AppColors.surfaceContainerLow,
-              padding: AppPaddings.all16,
-              child: AppButtons.primary(
-                height: 44.h,
-                bgColor: AppColors.primary,
-                textStyle: AppTextStyles.titleMedium.copyWith(
-                  color: AppColors.materialThemeWhite,
+            // Fixed bottom button
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                color: AppColors.surfaceContainerLow,
+                padding: AppPaddings.all16,
+                child: AppButtons.primary(
+                  height: 44.h,
+                  bgColor: AppColors.primary,
+                  textStyle: AppTextStyles.titleMedium.copyWith(
+                    color: AppColors.materialThemeWhite,
+                  ),
+                  onPressed: () {
+                    // goTo(context: context, newScreen: CartCheckout());
+                  },
+                  title: 'Proceed',
                 ),
-                onPressed: () {
-                  // goTo(context: context, newScreen: CartCheckout());
-                },
-                title: 'Proceed',
               ),
             ),
           ],

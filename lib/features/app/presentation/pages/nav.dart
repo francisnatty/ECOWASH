@@ -1,5 +1,6 @@
 import 'package:ecowash/features/app/presentation/pages/cart/screens/cart.dart';
 import 'package:ecowash/features/app/presentation/pages/dashboard/dashboard.dart';
+import 'package:ecowash/features/app/presentation/pages/laundry/screens/product_details.dart';
 import 'package:ecowash/features/app/presentation/pages/wallet/screens/wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +29,7 @@ class _HomeNavState extends State<HomeNav> {
     const CartScreen(),
     const CartScreen(),
     const WalletSc(),
-    const CartScreen(),
+    const ProductDetails(),
   ];
 
   @override
