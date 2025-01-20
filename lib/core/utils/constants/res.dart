@@ -1,5 +1,11 @@
 class AppIcons {
   static const String _path = 'assets/icons/';
+  static const String _bottomNav = 'assets/icons/bottom_nav/';
+
+  static const String home = '${_bottomNav}home.svg';
+  static const String cart = '${_bottomNav}cart.svg';
+  static const String profile = '${_bottomNav}profile.svg';
+  static const String wallet = '${_bottomNav}wallet.svg';
 
   static const String notification = '${_path}notification.svg';
   static const String search = '${_path}search.svg';
@@ -19,6 +25,9 @@ class AppIcons {
   static const String cancel = '${_path}cancel.svg';
   static const String edit = '${_path}edit.svg';
   static const String tele = '${_path}tele.svg';
+
+  static const String history = '${_path}history.svg';
+  static const String eye = '${_path}eye.svg';
 }
 
 class AppImages {
@@ -32,4 +41,5 @@ class AppImages {
   static const String laundry = '${_path}laundry.png';
   static const String laundryShop = '${_path}laundry-shop.jpeg';
   static const String clothes = '${_path}clothes.png';
+  static const String weQuickPayLogo = '${_path}weQuickPayLogo.png';
 }
