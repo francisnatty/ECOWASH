@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/utils/utils.dart';
 import '../widgets/transaction_widget.dart';
+import 'topup.dart';
 
 class WalletSc extends StatefulWidget {
   const WalletSc({super.key});
@@ -126,7 +127,9 @@ class _WalletScState extends State<WalletSc> {
                       bgColor: AppColors.primary,
                       textColor: AppColors.materialThemeWhite,
                       title: 'Top up',
-                      onPressed: () {},
+                      onPressed: () {
+                        goTo(context: context, newScreen: const TopUp());
+                      },
                     ),
                   ),
                 ],

@@ -25,11 +25,11 @@ class TextFields {
       style: style ?? const TextStyle(fontFamily: 'Poppins'),
       keyboardType: keyboardType,
       // inputFormatters: format ? [PriceFormatter()] : null,
-      // decoration: _inputDecoration(
-      //   hintText: hintText,
-      //   fillColor: fillColor,
-      //   filled: fill,
-      // ),
+      decoration: _inputDecoration(
+        hintText: hintText,
+        fillColor: fillColor,
+        filled: fill,
+      ),
     );
   }
 
