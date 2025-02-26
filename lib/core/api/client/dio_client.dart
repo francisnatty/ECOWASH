@@ -11,7 +11,7 @@ class DioClient implements ApiClient {
   DioClient() {
     _client = Dio()
       ..options.baseUrl =
-          'https://foodlify-backend-v2-966541614788.us-central1.run.app/api/v2/';
+          'https://echowash-backend-966541614788.us-central1.run.app//api/';
     // _customInterceptor = CustomInterceptor(dio: _client);
     // _client.interceptors.add(_customInterceptor);
   }

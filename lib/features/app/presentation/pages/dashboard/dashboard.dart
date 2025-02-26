@@ -4,9 +4,9 @@ import 'package:ecowash/features/app/presentation/pages/laundry/screens/laundry.
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:ecowash/core/utils/constants/app_constants.dart';
 import 'package:ecowash/core/widgets/wwidgets.dart';
 
+import '../../../../../core/utils/animations/transition_animations.dart';
 import 'widgets/discount_widget.dart';
 
 class DashboardSc extends StatefulWidget {
@@ -158,7 +158,15 @@ class _DashboardScState extends State<DashboardSc> {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        goTo(context: context, newScreen: LaundryScreen());
+                        Navigator.push(
+                          context,
+                          AppPageRoute(
+                            page: const LaundryScreen(),
+                            transitionType: TransitionType.slideFromBottom,
+                          ),
+                        );
+
+                        //  goTo(context: context, newScreen: const LaundryScreen());
                       },
                       child: Container(
                         height: itemHeight,
@@ -239,13 +247,25 @@ class _DashboardScState extends State<DashboardSc> {
                         ),
                       );
                     }),
-              )
+              ),
 
-              // AppButtons.primary(
-              //   onPressed: () {},
-              //   title: 'HAHA',
-              // ),
-              // AppButtons.loading()
+              const Hspacing(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Products',
+                    style: AppTextStyles.titleSmall,
+                  ),
+                  Text(
+                    'See all',
+                    style: AppTextStyles.bodySmaller.copyWith(
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+              const Hspacing(height: 10),
             ],
           ),
         ),

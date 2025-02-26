@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class LaundryCheckout extends StatefulWidget {
@@ -11,7 +10,7 @@ class LaundryCheckout extends StatefulWidget {
 class _LaundryCheckoutState extends State<LaundryCheckout> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SafeArea(
         child: Column(
           children: [],

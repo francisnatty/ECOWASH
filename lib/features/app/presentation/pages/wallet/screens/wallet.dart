@@ -97,7 +97,7 @@ class _WalletScState extends State<WalletSc> {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            Wspacing(width: 10),
+                            const Wspacing(width: 10),
                             Text(
                               'WeQuickPay',
                               style: AppTextStyles.labelMedium.copyWith(

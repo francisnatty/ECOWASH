@@ -105,7 +105,7 @@ class _TopUpState extends State<TopUp> {
                     ),
                   ),
                   const Hspacing(height: 20),
-                  PaymentOptionColumn(),
+                  const PaymentOptionColumn(),
                 ],
               ),
             ),

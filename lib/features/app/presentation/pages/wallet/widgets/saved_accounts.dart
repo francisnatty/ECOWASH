@@ -42,9 +42,8 @@ class _SavedAccountWidgetState extends State<SavedAccountWidget> {
                 ),
               ),
               TextSpan(
-                text: ' ' +
-                    accountName.substring(
-                        accountName.indexOf('(')), // Extract bank/card info
+                text: ' ${accountName.substring(
+                        accountName.indexOf('('))}', // Extract bank/card info
                 style: AppTextStyles.bodyLarge.copyWith(
                   color: AppColors.onSecondaryContainer,
                   fontWeight: FontWeight.w600,

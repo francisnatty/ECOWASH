@@ -3,11 +3,9 @@ import 'package:ecowash/core/utils/utils.dart';
 import 'package:ecowash/core/widgets/wwidgets.dart';
 import 'package:ecowash/features/app/presentation/pages/laundry/widgets/reviews_tab.dart';
 import 'package:ecowash/features/app/presentation/pages/laundry/widgets/service_tab.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../widgets/add_item_widget.dart';
 import '../widgets/product_tab.dart';
 
 class LaundryProfile extends StatefulWidget {
@@ -28,9 +26,9 @@ class _LaundryProfileState extends State<LaundryProfile> {
   ];
 
   List<Widget> tabScreens = [
-    ServiceTab(),
-    ProductTab(),
-    ReviewsTab(),
+    const ServiceTab(),
+    const ProductTab(),
+    const ReviewsTab(),
   ];
 
   @override

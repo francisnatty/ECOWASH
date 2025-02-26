@@ -6,7 +6,6 @@ import 'package:ecowash/features/app/presentation/pages/cart/screens/tab/complet
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../widgets/cart_widget.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});

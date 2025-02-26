@@ -1,6 +1,14 @@
 class AppIcons {
   static const String _path = 'assets/icons/';
   static const String _bottomNav = 'assets/icons/bottom_nav/';
+  static const String _social = 'assets/icons/social/';
+
+  static const String email = '${_social}email.svg';
+  static const String facebook = '${_social}facebook.svg';
+  static const String ig = '${_social}ig.svg';
+  static const String linkdn = '${_social}linkdn.svg';
+  static const String website = '${_social}website.svg';
+  static const String x = '${_social}x.svg';
 
   static const String home = '${_bottomNav}home.svg';
   static const String cart = '${_bottomNav}cart.svg';
@@ -22,6 +30,7 @@ class AppIcons {
   static const String boxIcon = '${_path}box_icon.svg';
   static const String plusIcon = '${_path}plus_icon.svg';
   static const String minusIcon = '${_path}minus_icon.svg';
+  static const String forwardIcon = '${_path}forward_icon.svg';
   static const String cancel = '${_path}cancel.svg';
   static const String edit = '${_path}edit.svg';
   static const String tele = '${_path}tele.svg';
@@ -32,6 +41,9 @@ class AppIcons {
   static const String dropIcon = '${_path}drop_icon.svg';
   static const String gogle = '${_path}google.svg';
   static const String apple = '${_path}apple.svg';
+  static const String padlock = '${_path}padlock.svg';
+  static const String copy = '${_path}copy.svg';
+  static const String upload = '${_path}upload.svg';
 
   static const String testHeader = '${_path}test_header.svg';
   static const String testFooter = '${_path}test_footer.svg';
@@ -53,4 +65,5 @@ class AppImages {
   static const String ecowashLogo = '${_path}ecowash_logo.png';
   static const String pressingIron = '${_path}pressing_iron.png';
   static const String walletBg = '${_path}wallet_bg.jpg';
+  static const onbBg = '${_path}onb_bg.png';
 }

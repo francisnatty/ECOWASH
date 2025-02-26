@@ -1,9 +1,8 @@
 import 'package:ecowash/core/utils/constants/app_constants.dart';
 import 'package:ecowash/core/utils/utils.dart';
 import 'package:ecowash/core/widgets/wwidgets.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:ecowash/features/auth/presentation/pages/login/login.dart';
+import 'package:ecowash/features/auth/presentation/pages/signup/otp_verification.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -69,7 +68,12 @@ class _SignUpState extends State<SignUp> {
                   ),
                   const SizedBox(height: 20),
                   AppButtons.primary(
-                    onPressed: () {},
+                    onPressed: () {
+                      goTo(
+                        context: context,
+                        newScreen: const OtpVerificationScreen(),
+                      );
+                    },
                     title: 'Login to account',
                   ),
                   const SizedBox(height: 20),
@@ -91,6 +95,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ],
                   ),
+
                   const SizedBox(
                       height: 100), // Spacing to avoid overlap with the footer
                 ],

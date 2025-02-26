@@ -14,6 +14,7 @@ class AroundYouWidget extends StatelessWidget {
     return SizedBox(
       height: 150.h,
       child: ListView.builder(
+          physics: const BouncingScrollPhysics(),
           itemCount: 5,
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,

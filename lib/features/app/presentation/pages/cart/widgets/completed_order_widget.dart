@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/utils/utils.dart';
@@ -39,7 +38,7 @@ class _CompletedOrderWidgetState extends State<CompletedOrderWidget> {
             ),
             const Row(
               children: [
-                const SvgIcon(
+                SvgIcon(
                   icon: AppIcons.boxIcon,
                 ),
                 Wspacing(width: 5),

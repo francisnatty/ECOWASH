@@ -1,6 +1,4 @@
 import 'package:ecowash/core/utils/constants/app_texts.dart';
-import 'package:ecowash/core/widgets/spacing.dart';
-import 'package:ecowash/core/widgets/svg_icon.dart';
 import 'package:ecowash/core/widgets/wwidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -58,14 +56,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                           ],
                         ),
                         Container(
-                          padding: EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
                           height: 32.h,
                           width: 32.w,
                           decoration: BoxDecoration(
                             color: AppColors.materialThemeWhite,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: SvgIcon(icon: AppIcons.favourite),
+                          child: const SvgIcon(icon: AppIcons.favourite),
                         )
                       ],
                     ),
@@ -181,7 +179,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                   Expanded(
                       child: GridView.builder(
-                          padding: EdgeInsets.all(0),
+                          padding: const EdgeInsets.all(0),
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2, // 2 items per row
@@ -198,7 +196,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           ),
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppColors.surfaceContainerLow,
             ),
             child: Row(

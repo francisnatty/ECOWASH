@@ -1,5 +1,4 @@
 import 'package:ecowash/core/utils/utils.dart';
-import 'package:ecowash/core/widgets/spacing.dart';
 import 'package:ecowash/core/widgets/wwidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -59,7 +58,7 @@ class _CartCheckoutState extends State<CartCheckout> {
                     ),
                   ),
                   const Hspacing(height: 30),
-                  PaymentOptionColumn()
+                  const PaymentOptionColumn()
                 ],
               ),
             ),

@@ -78,6 +78,63 @@ class TextFields {
     );
   }
 
+  static Widget passwordTextField({
+    required String hintText,
+    required TextEditingController controller,
+    required String iconPath,
+    required String suffixIcon,
+    Color? fillColor,
+    bool? fill = false,
+    Color? iconColor,
+    TextInputType? keyboardType,
+    String? Function(String?)? validator,
+    bool obscureText = false,
+    ValueChanged<String>? onChanged,
+    FocusNode? focusNode,
+    bool readOnly = false,
+    TextStyle? style,
+  }) {
+    return TextFormField(
+      controller: controller,
+      keyboardType: keyboardType,
+      style: style ?? const TextStyle(fontFamily: 'Poppins'),
+      validator: validator,
+      focusNode: focusNode,
+      obscureText: obscureText,
+      onChanged: onChanged,
+      readOnly: readOnly,
+      decoration: _inputDecoration(
+        hintText: hintText,
+        fillColor: fillColor,
+        filled: fill,
+        suffixIcon: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: SvgPicture.asset(
+            suffixIcon,
+            height: 20,
+            width: 20,
+            fit: BoxFit.contain,
+            colorFilter: iconColor != null
+                ? ColorFilter.mode(iconColor, BlendMode.srcIn)
+                : null,
+          ),
+        ),
+        prefixIcon: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: SvgPicture.asset(
+            iconPath,
+            height: 20,
+            width: 20,
+            fit: BoxFit.contain,
+            colorFilter: iconColor != null
+                ? ColorFilter.mode(iconColor, BlendMode.srcIn)
+                : null,
+          ),
+        ),
+      ),
+    );
+  }
+
   /// Dropdown field
   // static Widget dropDownField({
   //   required List<String> items,
@@ -117,6 +174,7 @@ class TextFields {
     Color? fillColor,
     bool? filled = false,
     Widget? prefixIcon,
+    Widget? suffixIcon,
   }) {
     return InputDecoration(
       prefixIcon: prefixIcon,
@@ -157,6 +215,7 @@ class TextFields {
       contentPadding:
           const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
       hintText: hintText,
+      suffixIcon: suffixIcon,
     );
   }
 }

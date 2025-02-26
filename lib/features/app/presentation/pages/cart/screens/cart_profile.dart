@@ -1,7 +1,6 @@
 import 'package:ecowash/core/utils/utils.dart';
 import 'package:ecowash/core/widgets/wwidgets.dart';
 import 'package:ecowash/features/app/presentation/pages/cart/screens/cart_checkout.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -146,7 +145,7 @@ class CartProfile extends StatelessWidget {
                   color: AppColors.outline,
                 ),
                 onPressed: () {
-                  goTo(context: context, newScreen: CartCheckout());
+                  goTo(context: context, newScreen: const CartCheckout());
                 },
                 title: 'Proceed',
               ),

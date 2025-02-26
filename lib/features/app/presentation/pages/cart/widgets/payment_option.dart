@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/utils/constants/app_constants.dart';
 
 class PaymentOptionColumn extends StatefulWidget {
+  const PaymentOptionColumn({super.key});
+
   @override
   _PaymentOptionColumnState createState() => _PaymentOptionColumnState();
 }
