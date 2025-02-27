@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "882315377343",
+    "project_id": "echowash-7fbf6",
+    "storage_bucket": "echowash-7fbf6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882315377343:android:98577b8f73dc8d1728240a",
+        "android_client_info": {
+          "package_name": "com.qtss.ecowash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882315377343-2tmaig313rgrjc203guj04aj7trsi30h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYz5MJ-qZpLgzzXIwidvIbqOPh361zu-M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882315377343-2tmaig313rgrjc203guj04aj7trsi30h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "882315377343-nd1ele7mqvk0qigg70vb6tfjqutl22p9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.qtss.ecowash"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
