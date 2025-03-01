@@ -25,21 +25,36 @@ class AuthServiceImpl implements AuthService {
   //final localStorage = Di.getIt<LocalStorage>();
   // final apiRequest=
   @override
-  Future<ApiResponse> appleSignIn({required AppleSignInPayload payload}) {
-    // TODO: implement appleSignIn
-    throw UnimplementedError();
+  Future<ApiResponse> appleSignIn({required AppleSignInPayload payload}) async {
+    final response = await apiClient.request(
+      path: ApiEndpoints.appleSigning,
+      method: MethodType.post,
+    );
+
+    return response;
   }
 
   @override
-  Future<ApiResponse> changePassword({required ChangePasswordPayload payload}) {
-    // TODO: implement changePassword
-    throw UnimplementedError();
+  Future<ApiResponse> changePassword(
+      {required ChangePasswordPayload payload}) async {
+    final response = await apiClient.request(
+        path: ApiEndpoints.changePassword,
+        method: MethodType.post,
+        payload: payload.toJson()),;
+
+    return response;
   }
 
   @override
-  Future<ApiResponse> googleSigIn({required GoogleSigInPayload payload}) {
-    // TODO: implement googleSigIn
-    throw UnimplementedError();
+  Future<ApiResponse> googleSigIn({required GoogleSigInPayload payload}) async {
+    final response = await apiClient.request(
+      path: ApiEndpoints.googleSignin,
+      method: MethodType.post,
+      payload: payload.toJson(),
+    );
+    print(response.data);
+
+    return response;
   }
 
   @override
@@ -52,6 +67,7 @@ class AuthServiceImpl implements AuthService {
     final response = await apiClient.request(
       path: ApiEndpoints.phoneSignup,
       method: MethodType.post,
+      payload: paylad.toJson(),
     );
 
     return response;
@@ -59,13 +75,20 @@ class AuthServiceImpl implements AuthService {
 
   @override
   Future<ApiResponse> sendOtp({required String phone}) {
-    // TODO: implement sendOtp
     throw UnimplementedError();
   }
 
   @override
-  Future<ApiResponse> verifyOtp({required String phone, required String code}) {
-    // TODO: implement verifyOtp
-    throw UnimplementedError();
+  Future<ApiResponse> verifyOtp(
+      {required String phone, required String code}) async {
+    final response = await apiClient.request(
+        path: ApiEndpoints.verifyOtp,
+        method: MethodType.post,
+        payload: {
+          'phone': phone,
+          'otp': code,
+        });
+
+    return response;
   }
 }

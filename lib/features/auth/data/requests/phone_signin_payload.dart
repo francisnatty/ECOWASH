@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class PhoneSignInPayload {
   final String phone;
   final String password;
@@ -24,4 +25,8 @@ class PhoneSignInPayload {
       'role': role,
     };
   }
+
+  @override
+  String toString() =>
+      'PhoneSignInPayload(phone: $phone, password: $password, role: $role)';
 }

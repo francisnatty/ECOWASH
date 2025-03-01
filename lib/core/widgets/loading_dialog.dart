@@ -1,3 +1,4 @@
+import 'package:ecowash/core/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -7,21 +8,31 @@ class LoadingDialog {
       context: context,
       barrierDismissible: false,
       builder: (context) {
-        return Dialog(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const SpinKitFadingCircle(
-                  color: Colors.blue, // Customize color
-                  size: 50.0,
+        return WillPopScope(
+          onWillPop: () async => false,
+          child: Center(
+            // Ensures the dialog is centered
+            child: Material(
+              color: Colors.transparent, // Removes extra background color
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                const SizedBox(height: 16),
-                Text(message, style: const TextStyle(fontSize: 16)),
-              ],
+                child: const IntrinsicWidth(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SpinKitFadingCircle(
+                        color: AppColors
+                            .primary, // Replace with AppColors.primary if needed
+                        size: 50.0,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
         );

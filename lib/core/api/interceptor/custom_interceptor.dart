@@ -1,83 +1,79 @@
-// import 'package:dio/dio.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-// import 'package:foodlify_hub/features/auth/presentation/pages/onboarding_new.dart';
+import '../../../main.dart';
+import '../../di/service_locator.dart';
+import '../../utils/local_storage.dart';
 
-// import '../../../config/dependency_injection/service_locator.dart';
+class CustomInterceptor extends Interceptor {
+  final Dio dio;
 
-// import '../../../features/app/sm/auth_status/auth_status_cubit.dart';
-// import '../../../main.dart';
-// import '../../storage/local_storage.dart';
+  CustomInterceptor({required this.dio});
 
-// class CustomInterceptor extends Interceptor {
-//   final Dio dio;
+  LocalStorage localStorage = Di.getIt<LocalStorage>();
 
-//   CustomInterceptor({required this.dio});
+  @override
+  void onError(DioException err, ErrorInterceptorHandler handler) async {
+    if (err.response?.statusCode == 401) {
+      //logout
 
-//   LocalStorage localStorage = Di.getIt<LocalStorage>();
+      // if (navigatorKey.currentContext != null) {
+      //   //showCustomDialog(context: navigatorKey.currentContext!, child: Container(child: Container(),));
+      //   navigatorKey.currentState?.context.read<AuthStatusCubit>().logoutUser();
+      //   navigatorKey.currentState?.pushAndRemoveUntil(
+      //     MaterialPageRoute(builder: (context) => const OnboardingNew()),
+      //     (Route<dynamic> route) => false,
+      //   );
+      // }
 
-//   @override
-//   void onError(DioException err, ErrorInterceptorHandler handler) async {
-//     if (err.response?.statusCode == 401) {
-//       //logout
+      // final response = await _refreshTokenRequest();
+      // if (response?.statusCode == 200) {
+      //   var newAccessToken = response!.data['token'];
+      //   DebugLogger.log('PRINT ACCESSTOKEN', newAccessToken);
 
-//       if (navigatorKey.currentContext != null) {
-//         //showCustomDialog(context: navigatorKey.currentContext!, child: Container(child: Container(),));
-//         navigatorKey.currentState?.context.read<AuthStatusCubit>().logoutUser();
-//         navigatorKey.currentState?.pushAndRemoveUntil(
-//           MaterialPageRoute(builder: (context) => const OnboardingNew()),
-//           (Route<dynamic> route) => false,
-//         );
+      //   final options = err.requestOptions;
+      //   options.headers['Authorization'] = 'Bearer $newAccessToken';
+      //   final retryResponse = await dio.request(options.path,
+      //       options: Options(
+      //         method: options.method,
+      //         headers: options.headers,
+      //       ));
+
+      //   return handler.resolve(retryResponse);
+      // }
+    }
+    handler.next(err);
+  }
+
+  @override
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
+    handler.next(options);
+  }
+
+  @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    handler.next(response);
+  }
+
+//   Future<Response?> _refreshTokenRequest() async {
+//     final refreshToken = await localStorage.getRefreshToke();
+
+//     try {
+//       final response = await dio.post(
+//           'https://sina-62043178b88f.herokuapp.com/api/refresh-token',
+//           data: {'refreshToken': refreshToken});
+//       if (response is Map) {
+//         var ii = response.data['message'];
+//         DebugLogger.log('response', ii);
 //       }
-
-//       // final response = await _refreshTokenRequest();
-//       // if (response?.statusCode == 200) {
-//       //   var newAccessToken = response!.data['token'];
-//       //   DebugLogger.log('PRINT ACCESSTOKEN', newAccessToken);
-
-//       //   final options = err.requestOptions;
-//       //   options.headers['Authorization'] = 'Bearer $newAccessToken';
-//       //   final retryResponse = await dio.request(options.path,
-//       //       options: Options(
-//       //         method: options.method,
-//       //         headers: options.headers,
-//       //       ));
-
-//       //   return handler.resolve(retryResponse);
-//       // }
+//       DebugLogger.log('REFRESH TOKEN ERROR', response);
+//       return response;
+//     } catch (e) {
+//       DebugLogger.log('REFRESH TOKEN ERROR', e.toString());
+//       return null;
 //     }
-//     handler.next(err);
 //   }
-
-//   @override
-//   void onRequest(
-//       RequestOptions options, RequestInterceptorHandler handler) async {
-//     handler.next(options);
-//   }
-
-//   @override
-//   void onResponse(Response response, ResponseInterceptorHandler handler) {
-//     handler.next(response);
-//   }
-
-// //   Future<Response?> _refreshTokenRequest() async {
-// //     final refreshToken = await localStorage.getRefreshToke();
-
-// //     try {
-// //       final response = await dio.post(
-// //           'https://sina-62043178b88f.herokuapp.com/api/refresh-token',
-// //           data: {'refreshToken': refreshToken});
-// //       if (response is Map) {
-// //         var ii = response.data['message'];
-// //         DebugLogger.log('response', ii);
-// //       }
-// //       DebugLogger.log('REFRESH TOKEN ERROR', response);
-// //       return response;
-// //     } catch (e) {
-// //       DebugLogger.log('REFRESH TOKEN ERROR', e.toString());
-// //       return null;
-// //     }
-// //   }
-// // }
 // }
+}

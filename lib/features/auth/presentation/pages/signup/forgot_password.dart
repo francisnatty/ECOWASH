@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/utils.dart';
 import '../../../../../core/widgets/wwidgets.dart';
-import 'phone_number_signin.dart';
+import '../../widgets/design_widget.dart';
+import '../../widgets/phone_num_textfield.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -40,7 +41,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         color: AppColors.onSurfaceVariant,
                       ),
                     ),
-                    const PhoneNumberField(),
+                    PhoneNumberField(
+                      controller: controller,
+                    ),
                     const Hspacing(height: 20),
                     AppButtons.primary(
                       onPressed: () {

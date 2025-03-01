@@ -5,6 +5,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../../core/utils/utils.dart';
 import '../../../../../core/widgets/wwidgets.dart';
+import '../../widgets/design_widget.dart';
 import '../login/login.dart';
 import 'phone_number_signin.dart';
 

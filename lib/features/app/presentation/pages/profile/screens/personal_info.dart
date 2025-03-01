@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../core/utils/utils.dart';
 import '../../../../../../core/widgets/wwidgets.dart';
+import '../../../../../auth/presentation/widgets/phone_num_textfield.dart';
 
 class PersonalInfo extends StatefulWidget {
   const PersonalInfo({super.key});
@@ -68,7 +69,9 @@ class _PersonalInfoState extends State<PersonalInfo> {
                 style: AppTextStyles.labelLarge
                     .copyWith(color: AppColors.onSurfaceVariant),
               ),
-              const PhoneNumberField(),
+              PhoneNumberField(
+                controller: controller,
+              ),
               const Hspacing(height: 30),
               AppButtons.primary(
                 onPressed: () {},

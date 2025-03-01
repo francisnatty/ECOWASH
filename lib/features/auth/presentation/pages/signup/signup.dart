@@ -1,9 +1,14 @@
 import 'package:ecowash/core/utils/constants/app_constants.dart';
 import 'package:ecowash/core/utils/utils.dart';
 import 'package:ecowash/core/widgets/wwidgets.dart';
+import 'package:ecowash/features/auth/data/requests/google_signin_payload.dart';
+import 'package:ecowash/features/auth/data/service/google_service.dart';
 import 'package:ecowash/features/auth/presentation/pages/login/login.dart';
 import 'package:ecowash/features/auth/presentation/pages/signup/otp_verification.dart';
+import 'package:ecowash/features/auth/presentation/pages/signup/phone_number_signin.dart';
+import 'package:ecowash/features/auth/presentation/sm/auth_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -13,6 +18,28 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final GoogleSignInService _signInService = GoogleSignInService();
+
+  Future<void> _googleSignIn() async {
+    final authProvider = Provider.of<AuthProvider>(
+      context,
+      listen: false,
+    );
+
+    final result = await _signInService.signIn();
+    if (result.success || result.payload == null) {
+      print('true');
+      final payload = GoogleSigInPayload(
+        googleId: result.payload!.googleId,
+        email: result.payload!.email,
+        role: 'USER',
+      );
+      DebugLogger.log('params', payload.toString());
+      if (!mounted) return;
+      await authProvider.googleSignIn(context: context, payload: payload);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +79,9 @@ class _SignUpState extends State<SignUp> {
                   ),
                   const SizedBox(height: 30),
                   AppButtons.iconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await _googleSignIn();
+                    },
                     title: 'Continue with Google',
                     icon: AppIcons.gogle,
                     bgColor: AppColors.surfaceContainer,
@@ -71,7 +100,7 @@ class _SignUpState extends State<SignUp> {
                     onPressed: () {
                       goTo(
                         context: context,
-                        newScreen: const OtpVerificationScreen(),
+                        newScreen: const PhoneNumberSignin(),
                       );
                     },
                     title: 'Login to account',

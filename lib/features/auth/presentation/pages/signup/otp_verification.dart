@@ -1,15 +1,19 @@
 import 'package:ecowash/features/auth/presentation/pages/login/login.dart';
+import 'package:ecowash/features/auth/presentation/sm/auth_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../core/utils/utils.dart';
 import '../../../../../core/widgets/wwidgets.dart';
+import '../../widgets/design_widget.dart';
 import 'phone_number_signin.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
-  const OtpVerificationScreen({super.key});
+  final String phoneNumber;
+  const OtpVerificationScreen({super.key, required this.phoneNumber});
 
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
@@ -26,6 +30,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -84,21 +89,16 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     const Hspacing(height: 20),
                     AppButtons.primary(
                       onPressed: () {
-                        goTo(
-                          context: context,
-                          newScreen: const LoginScreen(),
-                        );
-                        //  if (_pinController.text.length == 6) {
-                        //    authProvider.verifyForgotPasswordEmail(
-                        //      email: widget.email,
-                        //      otp: _pinController.text.trim(),
-                        //      context: context);
-                        //  } else {
-                        //    FlushbarNotification.showErrorMessage(
-                        //      context,
-                        //      message: 'pin incomplete',
-                        //    );
-                        //  }
+                        // goTo(
+                        //   context: context,
+                        //   newScreen: const LoginScreen(),
+                        // );
+                        if (_pinController.text.length == 6) {
+                          authProvider.verifyOtp(
+                              context: context,
+                              phone: widget.phoneNumber,
+                              otp: _pinController.text.trim());
+                        } else {}
                       },
                       title: 'Verify',
                     ),

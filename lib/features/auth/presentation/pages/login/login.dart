@@ -6,6 +6,8 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../../core/utils/utils.dart';
 import '../../../../../core/widgets/wwidgets.dart';
+import '../../widgets/design_widget.dart';
+import '../../widgets/phone_num_textfield.dart';
 import '../signup/forgot_password.dart';
 import '../signup/phone_number_signin.dart';
 
@@ -17,7 +19,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController _pinController = TextEditingController();
+  TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +49,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: AppColors.onSurfaceVariant,
                       ),
                     ),
-                    PhoneNumberField(),
+                    PhoneNumberField(
+                      controller: controller,
+                    ),
                     const Hspacing(height: 15),
                     Text(
                       'Phone Number',
@@ -56,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     TextFields.passwordTextField(
                       hintText: '*******',
-                      controller: _pinController,
+                      controller: controller,
                       iconPath: AppIcons.padlock,
                       suffixIcon: AppIcons.eye,
                       fill: true,

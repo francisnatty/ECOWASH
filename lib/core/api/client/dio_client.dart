@@ -6,12 +6,12 @@ import '../api.dart';
 
 class DioClient implements ApiClient {
   late Dio _client;
-  // late CustomInterceptor _customInterceptor;
+  late CustomInterceptor _customInterceptor;
 
   DioClient() {
     _client = Dio()
       ..options.baseUrl =
-          'https://echowash-backend-966541614788.us-central1.run.app//api/';
+          'https://echowash-backend-966541614788.us-central1.run.app/api/';
     // _customInterceptor = CustomInterceptor(dio: _client);
     // _client.interceptors.add(_customInterceptor);
   }
