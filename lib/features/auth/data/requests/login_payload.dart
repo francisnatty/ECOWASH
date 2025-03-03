@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class LoginPayload {
   final String phone;
   final String password;
@@ -20,4 +21,7 @@ class LoginPayload {
       'password': password,
     };
   }
+
+  @override
+  String toString() => 'LoginPayload(phone: $phone, password: $password)';
 }

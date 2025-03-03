@@ -4,6 +4,7 @@ import 'package:ecowash/core/utils/enums/enums.dart';
 
 import '../../../../core/api/api.dart';
 import '../../../../core/di/service_locator.dart';
+import '../../../../core/utils/local_storage.dart';
 import '../requests/apple_signin_payload.dart';
 import '../requests/change_password_payload.dart';
 import '../requests/google_signin_payload.dart';
@@ -22,7 +23,7 @@ abstract class AuthService {
 
 class AuthServiceImpl implements AuthService {
   final apiClient = Di.getIt<ApiClient>();
-  //final localStorage = Di.getIt<LocalStorage>();
+  final localStorage = Di.getIt<LocalStorage>();
   // final apiRequest=
   @override
   Future<ApiResponse> appleSignIn({required AppleSignInPayload payload}) async {
@@ -40,7 +41,7 @@ class AuthServiceImpl implements AuthService {
     final response = await apiClient.request(
         path: ApiEndpoints.changePassword,
         method: MethodType.post,
-        payload: payload.toJson()),;
+        payload: payload.toJson());
 
     return response;
   }
@@ -58,8 +59,14 @@ class AuthServiceImpl implements AuthService {
   }
 
   @override
-  Future<ApiResponse> login({required LoginPayload payload}) {
-    throw UnimplementedError();
+  Future<ApiResponse> login({required LoginPayload payload}) async {
+    final response = await apiClient.request(
+      path: ApiEndpoints.login,
+      method: MethodType.post,
+      payload: payload.toJson(),
+    );
+
+    return response;
   }
 
   @override
@@ -82,12 +89,15 @@ class AuthServiceImpl implements AuthService {
   Future<ApiResponse> verifyOtp(
       {required String phone, required String code}) async {
     final response = await apiClient.request(
-        path: ApiEndpoints.verifyOtp,
+        path:
+            'https://echowash-backend-966541614788.us-central1.run.app${ApiEndpoints.verifyOtp}',
         method: MethodType.post,
         payload: {
           'phone': phone,
           'otp': code,
         });
+
+    print(response.data);
 
     return response;
   }

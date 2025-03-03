@@ -2,11 +2,13 @@
 import 'package:ecowash/core/utils/utils.dart';
 import 'package:ecowash/features/app/presentation/pages/laundry/screens/laundry.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:ecowash/core/widgets/wwidgets.dart';
 
 import '../../../../../core/utils/animations/transition_animations.dart';
+import '../../sm/collection/bloc/collection_bloc.dart';
 import 'widgets/discount_widget.dart';
 
 class DashboardSc extends StatefulWidget {
@@ -56,6 +58,18 @@ class _DashboardScState extends State<DashboardSc> {
       bgColor: AppColors.secondaryFixedDim,
     ),
   ];
+
+  @override
+  void initState() {
+    _loadData();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  _loadData() {
+    context.read<CollectionBloc>().add(GetCollectionsEvent());
+  }
+
   @override
   void dispose() {
     super.dispose();

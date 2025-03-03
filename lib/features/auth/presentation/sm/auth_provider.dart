@@ -27,7 +27,34 @@ class AuthProvider extends ChangeNotifier {
   Future<void> login({
     required BuildContext context,
     required LoginPayload payload,
-  }) async {}
+  }) async {
+    LoadingDialog.show(context);
+    final response = await authRepo.login(payload: payload);
+    response.fold((failure) {
+      LoadingDialog.hide(context);
+      ToastUtil.show(
+        context,
+        message: failure.message,
+        toastType: ToastType.error,
+      );
+    }, (successMsg) {
+      LoadingDialog.hide(context);
+      ToastUtil.show(
+        context,
+        message: successMsg,
+        toastType: ToastType.success,
+      );
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.push(
+          context,
+          AppPageRoute(
+            page: const HomeNav(),
+            transitionType: TransitionType.slideFromRight,
+          ),
+        );
+      });
+    });
+  }
 
   Future<void> verifyOtp(
       {required BuildContext context,
@@ -57,10 +84,6 @@ class AuthProvider extends ChangeNotifier {
             transitionType: TransitionType.slideFromRight,
           ),
         );
-        // goTo(
-        //   context: context,
-        //   newScreen: const OtpVerificationScreen(),
-        // );
       });
     });
   }
@@ -135,5 +158,7 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> changePassword(
       {required BuildContext context,
-      required ChangePasswordPayload payload}) async {}
+      required ChangePasswordPayload payload}) async {
+    LoadingDialog.show(context);
+  }
 }

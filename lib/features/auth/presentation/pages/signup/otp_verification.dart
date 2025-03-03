@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ecowash/features/auth/presentation/pages/login/login.dart';
 import 'package:ecowash/features/auth/presentation/sm/auth_provider.dart';
 import 'package:flutter/foundation.dart';
@@ -9,7 +11,6 @@ import 'package:provider/provider.dart';
 import '../../../../../core/utils/utils.dart';
 import '../../../../../core/widgets/wwidgets.dart';
 import '../../widgets/design_widget.dart';
-import 'phone_number_signin.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   final String phoneNumber;
@@ -21,9 +22,47 @@ class OtpVerificationScreen extends StatefulWidget {
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   final TextEditingController _pinController = TextEditingController();
+  Timer? _timer;
+  int _timeLeft = 60; // 60 seconds countdown
+  bool _canResend = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
+  void _startTimer() {
+    setState(() {
+      _timeLeft = 60;
+      _canResend = false;
+    });
+
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_timeLeft > 0) {
+        setState(() {
+          _timeLeft--;
+        });
+      } else {
+        _timer?.cancel();
+        setState(() {
+          _canResend = true;
+        });
+      }
+    });
+  }
+
+  void _resendOtp() {
+    // Implement your OTP resend logic here
+    // For example:
+    // authProvider.sendOtp(phoneNumber: widget.phoneNumber);
+
+    _startTimer();
+  }
 
   @override
   void dispose() {
+    _timer?.cancel();
     _pinController.dispose();
     super.dispose();
   }
@@ -56,7 +95,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       color: Colors.white,
                       child: PinCodeTextField(
                         appContext: context,
-                        length: 7,
+                        length: 6,
                         controller: _pinController,
                         obscureText: true,
                         obscuringWidget: const Text('*'),
@@ -89,11 +128,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     const Hspacing(height: 20),
                     AppButtons.primary(
                       onPressed: () {
-                        // goTo(
-                        //   context: context,
-                        //   newScreen: const LoginScreen(),
-                        // );
                         if (_pinController.text.length == 6) {
+                          print(_pinController.text.toString());
+                          print(widget.phoneNumber);
                           authProvider.verifyOtp(
                               context: context,
                               phone: widget.phoneNumber,
@@ -113,11 +150,33 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                           ),
                         ),
                         const SizedBox(width: 5),
-                        Text(
-                          'Resend',
-                          style: AppTextStyles.titleMedium.copyWith(
-                            color: AppColors.secondary,
-                          ),
+                        Row(
+                          children: [
+                            TextButton(
+                              onPressed: _canResend ? _resendOtp : null,
+                              style: TextButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                                minimumSize: const Size(10, 10),
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              ),
+                              child: Text(
+                                'Resend',
+                                style: AppTextStyles.titleMedium.copyWith(
+                                  color: _canResend
+                                      ? AppColors.secondary
+                                      : AppColors.onBackground.withOpacity(0.5),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 5),
+                            if (!_canResend)
+                              Text(
+                                '(${_timeLeft}s)',
+                                style: AppTextStyles.titleSmall.copyWith(
+                                  color: AppColors.onBackground,
+                                ),
+                              ),
+                          ],
                         ),
                       ],
                     ),

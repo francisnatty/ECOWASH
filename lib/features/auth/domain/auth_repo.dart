@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ecowash/features/auth/data/service/auth_service.dart';
 
 import '../../../core/di/service_locator.dart';
+import '../../../core/utils/local_storage.dart';
 import '../../../core/utils/utils.dart';
 import '../data/requests/apple_signin_payload.dart';
 import '../data/requests/change_password_payload.dart';
@@ -21,6 +22,8 @@ abstract class AuthRepo {
 
 class AuthRepoImpl implements AuthRepo {
   final authService = Di.getIt<AuthService>();
+  final localStorage = Di.getIt<LocalStorage>();
+
   @override
   ApiResult<bool> appleSignIn({required AppleSignInPayload payload}) async {
     throw UnimplementedError();
@@ -57,6 +60,7 @@ class AuthRepoImpl implements AuthRepo {
     DebugLogger.log('Login', response.rawJson);
     if (response.success!) {
       final String message = response.rawJson['message'];
+      await localStorage.saveAcessToken(response.rawJson['data']['token']);
       return Right(message);
     } else {
       return Left(response.failure!);
