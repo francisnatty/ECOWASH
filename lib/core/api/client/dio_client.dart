@@ -7,13 +7,10 @@ import '../api.dart';
 class DioClient implements ApiClient {
   late Dio _client;
   late CustomInterceptor _customInterceptor;
-
   DioClient() {
-    _client = Dio()
-      ..options.baseUrl =
-          'https://echowash-backend-966541614788.us-central1.run.app/api/';
-    // _customInterceptor = CustomInterceptor(dio: _client);
-    // _client.interceptors.add(_customInterceptor);
+    _client = Dio(BaseOptions(
+      baseUrl: 'https://echowash-backend-966541614788.us-central1.run.app/api/',
+    ));
   }
 
   @override
@@ -88,6 +85,7 @@ class DioClient implements ApiClient {
       return apiResponse;
     } catch (e) {
       DebugLogger.log('DIO ERROR', e.toString());
+      DebugLogger.log('DIO ERROR', _client.options.baseUrl);
       var err = CustomHandlerObject.getError(error: e);
       apiResponse = ApiResponse(
         success: false,

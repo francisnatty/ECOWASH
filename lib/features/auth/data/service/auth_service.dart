@@ -61,7 +61,8 @@ class AuthServiceImpl implements AuthService {
   @override
   Future<ApiResponse> login({required LoginPayload payload}) async {
     final response = await apiClient.request(
-      path: ApiEndpoints.login,
+      path:
+          'https://echowash-backend-966541614788.us-central1.run.app/auth/login',
       method: MethodType.post,
       payload: payload.toJson(),
     );
@@ -89,8 +90,7 @@ class AuthServiceImpl implements AuthService {
   Future<ApiResponse> verifyOtp(
       {required String phone, required String code}) async {
     final response = await apiClient.request(
-        path:
-            'https://echowash-backend-966541614788.us-central1.run.app${ApiEndpoints.verifyOtp}',
+        path: ApiEndpoints.verifyOtp,
         method: MethodType.post,
         payload: {
           'phone': phone,

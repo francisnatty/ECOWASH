@@ -1,4 +1,5 @@
 import 'package:ecowash/core/widgets/wwidgets.dart';
+import 'package:ecowash/features/auth/presentation/pages/login/login.dart';
 import 'package:ecowash/features/auth/presentation/sm/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -121,10 +122,18 @@ class _PhoneNumberSigninState extends State<PhoneNumberSignin> {
                             ),
                           ),
                           const SizedBox(width: 10),
-                          Text(
-                            'Login',
-                            style: AppTextStyles.titleMedium.copyWith(
-                              color: AppColors.secondary,
+                          InkWell(
+                            onTap: () {
+                              goTo(
+                                context: context,
+                                newScreen: const LoginScreen(),
+                              );
+                            },
+                            child: Text(
+                              'Login',
+                              style: AppTextStyles.titleMedium.copyWith(
+                                color: AppColors.secondary,
+                              ),
                             ),
                           ),
                         ],

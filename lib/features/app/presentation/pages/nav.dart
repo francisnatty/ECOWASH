@@ -1,6 +1,5 @@
 import 'package:ecowash/features/app/presentation/pages/cart/screens/cart.dart';
 import 'package:ecowash/features/app/presentation/pages/dashboard/dashboard.dart';
-import 'package:ecowash/features/app/presentation/pages/laundry/screens/product_details.dart';
 import 'package:ecowash/features/app/presentation/pages/profile/screens/profile.dart';
 import 'package:ecowash/features/app/presentation/pages/wallet/screens/wallet.dart';
 import 'package:flutter/material.dart';
@@ -39,17 +38,11 @@ class _HomeNavState extends State<HomeNav> {
     }
 
     fetchAllOrders(context);
-    //  context.read<OrderBloc>().add(GetOrdersEvent());
+
     super.initState();
   }
 
-  void fetchAllOrders(BuildContext context) {
-    // context.read<ProductBloc>().add(GetProducts());
-    // context.read<OrderBloc>().add(GetOrdersEvent());
-    // context.read<OrderBloc>().add(GetRequestedOrdersEvent());
-    // context.read<OrderBloc>().add(GetCompletedOrdersEvent());
-    // context.read<OrderBloc>().add(GetActiveOrdersEvent());
-  }
+  void fetchAllOrders(BuildContext context) {}
 
   @override
   Widget build(BuildContext context) {

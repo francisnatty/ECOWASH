@@ -68,7 +68,7 @@ class CustomHandlerObject {
     try {
       if (error is DioException) {
         print(error.response?.statusCode);
-        print(error.message);
+        // print(error.response)
         print(error.requestOptions.path);
         if (error.response != null) {
           var responseData = error.response?.data;

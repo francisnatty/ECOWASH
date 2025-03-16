@@ -50,7 +50,7 @@ class CollectionServiceImpl implements CollectionService {
     apiClient.setToken(token!);
     print(token);
     final response = await apiClient.request(
-        path: 'collection/list',
+        path: 'collections/list',
         method: MethodType.get,
         fromJsonT: (json) => GetCollectionModel.fromJson(json));
 
