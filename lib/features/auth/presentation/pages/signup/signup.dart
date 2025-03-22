@@ -100,7 +100,7 @@ class _SignUpState extends State<SignUp> {
                     onPressed: () {
                       goTo(
                         context: context,
-                        newScreen: const PhoneNumberSignin(),
+                        newScreen: const PhoneNumberSignUp(),
                       );
                     },
                     title: 'Login to account',

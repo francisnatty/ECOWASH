@@ -13,6 +13,7 @@ class ChangePassword extends StatefulWidget {
 
 class _ChangePasswordState extends State<ChangePassword> {
   TextEditingController controller = TextEditingController();
+  bool _obsecurePassword = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,6 +36,14 @@ class _ChangePasswordState extends State<ChangePassword> {
                 iconPath: AppIcons.padlock,
                 suffixIcon: AppIcons.eye,
                 iconColor: Colors.black,
+                obsecureText: _obsecurePassword,
+                onVisibilityToggle: (value) {
+                  setState(
+                    () {
+                      _obsecurePassword = value;
+                    },
+                  );
+                },
               ),
               Text(
                 'Use atleast 8 characters',
@@ -54,6 +63,14 @@ class _ChangePasswordState extends State<ChangePassword> {
                 iconPath: AppIcons.padlock,
                 suffixIcon: AppIcons.eye,
                 iconColor: Colors.black,
+                obsecureText: _obsecurePassword,
+                onVisibilityToggle: (value) {
+                  setState(
+                    () {
+                      _obsecurePassword = value;
+                    },
+                  );
+                },
               ),
               Text(
                 'Use atleast 8 characters',

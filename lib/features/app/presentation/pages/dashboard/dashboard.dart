@@ -11,7 +11,7 @@ import 'package:ecowash/core/widgets/wwidgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import '../../sm/collection/bloc/collection_bloc.dart';
-import 'widgets/collection.dart';
+import 'widgets/collection_list.dart';
 import 'widgets/discount_widget.dart';
 
 class DashboardSc extends StatefulWidget {

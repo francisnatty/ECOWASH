@@ -1,8 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:ecowash/features/app/presentation/pages/profile/screens/personal_info.dart';
 import 'package:ecowash/features/app/presentation/pages/profile/screens/support.dart';
+import 'package:ecowash/features/auth/presentation/sm/auth_cubit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:ecowash/core/utils/utils.dart';
@@ -51,8 +53,11 @@ class _ProfileState extends State<Profile> {
       screen: const PersonalInfo(),
     ),
   ];
+
   @override
   Widget build(BuildContext context) {
+    final authCubit = context.read<AuthCubit>();
+
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -171,28 +176,33 @@ class _ProfileState extends State<Profile> {
               }),
             ),
             const Hspacing(height: 20),
-            Container(
-              padding: AppPaddings.all10,
-              decoration: BoxDecoration(
-                  color: AppColors.errorContainer,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    color: AppColors.onErrorContainer,
-                  )),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Logout',
-                    style: AppTextStyles.titleMedium.copyWith(
+            InkWell(
+              onTap: () async {
+                //  await authCubit.logout();
+              },
+              child: Container(
+                padding: AppPaddings.all10,
+                decoration: BoxDecoration(
+                    color: AppColors.errorContainer,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
                       color: AppColors.onErrorContainer,
+                    )),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Logout',
+                      style: AppTextStyles.titleMedium.copyWith(
+                        color: AppColors.onErrorContainer,
+                      ),
                     ),
-                  ),
-                  const Icon(
-                    Icons.arrow_forward_ios,
-                    size: 15,
-                  )
-                ],
+                    const Icon(
+                      Icons.arrow_forward_ios,
+                      size: 15,
+                    )
+                  ],
+                ),
               ),
             ),
           ],

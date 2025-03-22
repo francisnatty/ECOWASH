@@ -26,7 +26,12 @@ class GeolocationProvider extends ChangeNotifier {
         toastType: ToastType.error,
       );
     }, (success) {
-      print(success);
+      ToastUtil.show(
+        context,
+        message: success,
+        toastType: ToastType.success,
+      );
+      //  print(success);
     });
   }
 }

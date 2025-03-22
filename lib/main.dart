@@ -3,8 +3,10 @@ import 'package:ecowash/core/utils/utils.dart';
 import 'package:ecowash/features/app/presentation/pages/nav.dart';
 import 'package:ecowash/features/app/presentation/sm/collection/bloc/collection_bloc.dart';
 import 'package:ecowash/features/app/presentation/sm/geolocation/geolocation_provider.dart';
+import 'package:ecowash/features/auth/presentation/pages/listener/auth_listener.dart';
 import 'package:ecowash/features/auth/presentation/pages/login/login.dart';
 import 'package:ecowash/features/auth/presentation/pages/signup/signup.dart';
+import 'package:ecowash/features/auth/presentation/sm/auth_cubit.dart';
 import 'package:ecowash/features/auth/presentation/sm/auth_provider.dart';
 import 'package:ecowash/test.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -48,6 +50,13 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(
+              create: (context) {
+                final authCubit = getIt<AuthCubit>();
+                authCubit.checkAuthStatus();
+                return authCubit;
+              },
+            ),
+            BlocProvider(
               create: (context) => getIt<CollectionBloc>(),
             )
           ],
@@ -65,7 +74,10 @@ class MyApp extends StatelessWidget {
               useMaterial3: true,
             ),
             //  home: const PhoneNumberSignin(),
-            home: const HomeNav(),
+            home: const AuthListener(
+              authenticatedRoute: HomeNav(),
+              unauthenticatedRoute: SignUp(),
+            ),
             // home: const TestScreen(),
           ),
         );

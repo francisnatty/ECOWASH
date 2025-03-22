@@ -4,6 +4,7 @@ import 'package:ecowash/features/app/data/remote/geolocation_service.dart';
 import 'package:ecowash/features/app/domain/geolocation_repo.dart';
 import 'package:ecowash/features/app/presentation/sm/collection/bloc/collection_bloc.dart';
 import 'package:ecowash/features/auth/domain/auth_repo.dart';
+import 'package:ecowash/features/auth/presentation/sm/auth_cubit.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 
@@ -37,6 +38,7 @@ class Di {
 
   static void initializeBloc() {
     getIt.registerLazySingleton<CollectionBloc>(() => CollectionBloc());
+    getIt.registerLazySingleton<AuthCubit>(() => AuthCubit());
   }
 
   static void initializeRepositories() {

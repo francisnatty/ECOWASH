@@ -2,6 +2,7 @@ import 'package:ecowash/core/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../../../core/utils/animations/transition_animations.dart';
 import '../../../../../../core/widgets/wwidgets.dart';
@@ -16,7 +17,7 @@ class CollectionListWidget extends StatelessWidget {
     return BlocBuilder<CollectionBloc, CollectionState>(
       builder: (context, state) {
         if (state is CollectionLoading) {
-          return const CircularProgressIndicator();
+          return buildShimerLoading();
         }
         if (state is CollectionsLoaded) {
           final collections = state.collections.data;
@@ -76,8 +77,59 @@ class CollectionListWidget extends StatelessWidget {
             ),
           );
         }
-        return const CircularProgressIndicator();
+        return buildShimerLoading();
       },
+    );
+  }
+
+  Widget buildShimerLoading() {
+    return SizedBox(
+      height: 300,
+      child: Shimmer.fromColors(
+        baseColor: Colors.grey.shade300,
+        highlightColor: AppColors.primary.withOpacity(0.1),
+        child: GridView.builder(
+          padding: EdgeInsets.zero,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+          ),
+          itemCount: 6, // Show a fixed number of shimmer items
+          itemBuilder: (context, index) {
+            return Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Shimmer for image
+                  Container(
+                    height: 50.h,
+                    width: 50.w,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
+                  SizedBox(height: 20.h),
+                  // Shimmer for text
+                  Container(
+                    width: 60.w,
+                    height: 12.h,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

@@ -87,12 +87,14 @@ class TextFields {
     bool? fill = false,
     Color? iconColor,
     TextInputType? keyboardType,
+    required bool obsecureText,
     String? Function(String?)? validator,
-    bool obscureText = false,
+    // bool obscureText = false,
     ValueChanged<String>? onChanged,
     FocusNode? focusNode,
     bool readOnly = false,
     TextStyle? style,
+    required ValueChanged<bool> onVisibilityToggle,
   }) {
     return TextFormField(
       controller: controller,
@@ -100,23 +102,28 @@ class TextFields {
       style: style ?? const TextStyle(fontFamily: 'Poppins'),
       validator: validator,
       focusNode: focusNode,
-      obscureText: obscureText,
+      obscureText: obsecureText,
       onChanged: onChanged,
       readOnly: readOnly,
       decoration: _inputDecoration(
         hintText: hintText,
         fillColor: fillColor,
         filled: fill,
-        suffixIcon: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: SvgPicture.asset(
-            suffixIcon,
-            height: 20,
-            width: 20,
-            fit: BoxFit.contain,
-            colorFilter: iconColor != null
-                ? ColorFilter.mode(iconColor, BlendMode.srcIn)
-                : null,
+        suffixIcon: GestureDetector(
+          onTap: () {
+            onVisibilityToggle(!obsecureText);
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: SvgPicture.asset(
+              suffixIcon,
+              height: 20,
+              width: 20,
+              fit: BoxFit.contain,
+              colorFilter: iconColor != null
+                  ? ColorFilter.mode(iconColor, BlendMode.srcIn)
+                  : null,
+            ),
           ),
         ),
         prefixIcon: Padding(

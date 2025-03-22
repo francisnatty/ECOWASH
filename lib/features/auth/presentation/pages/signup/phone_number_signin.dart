@@ -9,17 +9,18 @@ import '../../../data/requests/phone_signin_payload.dart';
 import '../../widgets/design_widget.dart';
 import '../../widgets/phone_num_textfield.dart';
 
-class PhoneNumberSignin extends StatefulWidget {
-  const PhoneNumberSignin({super.key});
+class PhoneNumberSignUp extends StatefulWidget {
+  const PhoneNumberSignUp({super.key});
 
   @override
-  State<PhoneNumberSignin> createState() => _PhoneNumberSigninState();
+  State<PhoneNumberSignUp> createState() => _PhoneNumberSignUpState();
 }
 
-class _PhoneNumberSigninState extends State<PhoneNumberSignin> {
+class _PhoneNumberSignUpState extends State<PhoneNumberSignUp> {
   TextEditingController phonecontroller = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  bool _obsecurePassword = true;
   @override
   void dispose() {
     phonecontroller.dispose();
@@ -71,8 +72,16 @@ class _PhoneNumberSigninState extends State<PhoneNumberSignin> {
                         controller: passwordController,
                         iconPath: AppIcons.padlock,
                         suffixIcon: AppIcons.eye,
+                        obsecureText: _obsecurePassword,
                         validator: notEmptyValidator,
                         iconColor: Colors.black,
+                        onVisibilityToggle: (value) {
+                          setState(
+                            () {
+                              _obsecurePassword = value;
+                            },
+                          );
+                        },
                       ),
                       Text(
                         'Use atleast 8 characters',

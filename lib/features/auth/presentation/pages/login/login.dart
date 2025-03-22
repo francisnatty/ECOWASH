@@ -1,5 +1,6 @@
 import 'package:ecowash/features/app/presentation/pages/nav.dart';
 import 'package:ecowash/features/auth/data/requests/login_payload.dart';
+import 'package:ecowash/features/auth/presentation/pages/signup/phone_number_signin.dart';
 import 'package:ecowash/features/auth/presentation/sm/auth_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController controller = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool _obsecurePassword = true;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -61,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const Hspacing(height: 15),
                       Text(
-                        'Phone Number',
+                        'Password',
                         style: AppTextStyles.labelLarge.copyWith(
                           color: AppColors.onSurfaceVariant,
                         ),
@@ -71,8 +73,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         controller: passwordController,
                         iconPath: AppIcons.padlock,
                         suffixIcon: AppIcons.eye,
+                        obsecureText: _obsecurePassword,
                         fill: true,
                         fillColor: AppColors.surface,
+                        iconColor: Colors.black,
+                        onVisibilityToggle: (value) {
+                          setState(
+                            () {
+                              _obsecurePassword = value;
+                            },
+                          );
+                        },
                       ),
                       const Hspacing(height: 7),
                       InkWell(
@@ -126,10 +137,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     const SizedBox(width: 10),
-                    Text(
-                      'Create Account',
-                      style: AppTextStyles.titleMedium.copyWith(
-                        color: AppColors.secondary,
+                    InkWell(
+                      onTap: () {
+                        goTo(
+                          context: context,
+                          newScreen: const PhoneNumberSignUp(),
+                        );
+                      },
+                      child: Text(
+                        'Create Account',
+                        style: AppTextStyles.titleMedium.copyWith(
+                          color: AppColors.secondary,
+                        ),
                       ),
                     ),
                   ],
