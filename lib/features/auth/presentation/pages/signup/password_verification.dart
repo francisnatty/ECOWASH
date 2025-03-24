@@ -7,7 +7,7 @@ import '../../../../../core/utils/utils.dart';
 import '../../../../../core/widgets/wwidgets.dart';
 import '../../widgets/design_widget.dart';
 import '../login/login.dart';
-import 'phone_number_signin.dart';
+import 'phone_number_signup.dart';
 
 class PasswordVerification extends StatefulWidget {
   const PasswordVerification({super.key});

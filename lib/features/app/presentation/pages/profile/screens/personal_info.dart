@@ -1,6 +1,6 @@
 import 'package:ecowash/features/app/presentation/pages/profile/screens/change_password.dart';
 import 'package:ecowash/features/app/presentation/pages/profile/widgets/image_withborder.dart';
-import 'package:ecowash/features/auth/presentation/pages/signup/phone_number_signin.dart';
+import 'package:ecowash/features/auth/presentation/pages/signup/phone_number_signup.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

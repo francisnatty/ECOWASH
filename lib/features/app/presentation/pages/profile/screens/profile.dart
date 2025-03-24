@@ -1,16 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:ecowash/features/app/presentation/pages/profile/screens/personal_info.dart';
 import 'package:ecowash/features/app/presentation/pages/profile/screens/support.dart';
+import 'package:ecowash/features/auth/presentation/pages/signup/signup.dart';
 import 'package:ecowash/features/auth/presentation/sm/auth_cubit.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:ecowash/core/utils/utils.dart';
 import 'package:ecowash/core/widgets/wwidgets.dart';
 
 import '../../../../../../core/utils/animations/transition_animations.dart';
+import '../../../../../auth/data/service/google_service.dart';
 import '../widgets/image_withborder.dart';
 import '../widgets/profile_widget.dart';
 
@@ -22,6 +22,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final GoogleSignInService _signInService = GoogleSignInService();
   final profileItems = [
     ProfileModel(
       title: 'Referrals',
@@ -54,10 +55,59 @@ class _ProfileState extends State<Profile> {
     ),
   ];
 
+  void _performLogout(BuildContext context) async {
+    try {
+      final signOut = await _signInService.signOut();
+
+      if (!mounted) return;
+      await context.read<AuthCubit>().logout();
+
+      if (!mounted) return;
+      goTo(
+        context: context,
+        newScreen: const SignUp(),
+      );
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Logout failed: $e')),
+      );
+    }
+  }
+
+  void _showLogoutConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Confirm Logout"),
+          content: const Text("Are you sure you want to log out?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close dialog
+              },
+              child: const Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close dialog
+                _performLogout(context);
+                goTo(
+                  context: context,
+                  newScreen: const SignUp(),
+                );
+              },
+              child: const Text("Logout"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final authCubit = context.read<AuthCubit>();
-
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -76,7 +126,6 @@ class _ProfileState extends State<Profile> {
                     color: AppColors.onSurface,
                   ),
                 ),
-                // const Hspacing(height: 10),
                 Text(
                   'fnathaniel929@gmail.com',
                   style: AppTextStyles.bodySmaller.copyWith(
@@ -143,51 +192,33 @@ class _ProfileState extends State<Profile> {
               children: List.generate(profileItems.length, (index) {
                 final model = profileItems[index];
                 return InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        AppPageRoute(
-                          page: model.screen,
-                          transitionType: TransitionType.slideFromRight,
-                        ),
-                      );
-                      // Navigator.push(
-                      //   context,
-                      //   PageRouteBuilder(
-                      //     pageBuilder:
-                      //         (context, animation, secondaryAnimation) =>
-                      //             model.screen,
-                      //     transitionsBuilder:
-                      //         (context, animation, secondaryAnimation, child) {
-                      //       return SlideTransition(
-                      //         position: Tween<Offset>(
-                      //           begin: const Offset(
-                      //               1.0, 0.0), // Slide in from the right
-                      //           end: Offset.zero, // Stop at the center
-                      //         ).animate(animation),
-                      //         child: child,
-                      //       );
-                      //     },
-                      //   ),
-                      // );
-                      //  goTo(context: context, newScreen: model.screen);
-                    },
-                    child: ProfileWidget(model: model));
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      AppPageRoute(
+                        page: model.screen,
+                        transitionType: TransitionType.slideFromRight,
+                      ),
+                    );
+                  },
+                  child: ProfileWidget(model: model),
+                );
               }),
             ),
             const Hspacing(height: 20),
             InkWell(
-              onTap: () async {
-                //  await authCubit.logout();
+              onTap: () {
+                _showLogoutConfirmationDialog(context);
               },
               child: Container(
                 padding: AppPaddings.all10,
                 decoration: BoxDecoration(
-                    color: AppColors.errorContainer,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: AppColors.onErrorContainer,
-                    )),
+                  color: AppColors.errorContainer,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: AppColors.onErrorContainer,
+                  ),
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

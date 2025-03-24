@@ -17,32 +17,61 @@ class GoogleSignInService {
   );
 
   //
-  Future<GoogleSignInResult> signIn() async {
+  Future<GoogleSignUpResult> signUp() async {
     try {
+      // Force account selection by logging out first
+      await _googleSignIn.signOut();
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
       if (googleUser == null) {
         DebugLogger.log('Google SignIn', 'null');
-        return GoogleSignInResult(
+        return GoogleSignUpResult(
             success: false, message: 'Sign in was cancelled', payload: null);
       }
 
       final String email = googleUser.email;
       final String googleId = googleUser.id;
 
-      final payload = _GoogleSigInPayload(googleId: googleId, email: email);
+      final payload = _GoogleSignUpPayload(googleId: googleId, email: email);
 
-      return GoogleSignInResult(
+      return GoogleSignUpResult(
         success: true,
         message: 'Google sign in successful',
         payload: payload,
       );
     } catch (e) {
-      return GoogleSignInResult(
+      return GoogleSignUpResult(
         success: false,
         message: 'Error during sign in: $e',
         payload: null,
       );
+    }
+  }
+
+  Future<String> signIn() async {
+    try {
+      await _googleSignIn.signOut();
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) {
+        DebugLogger.log('Google SignIn', 'Sign in was cancelled');
+        return '';
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      final String? idToken = googleAuth.idToken;
+      if (idToken == null) {
+        DebugLogger.log('Google SignIn', 'Failed to get ID token');
+        return '';
+      }
+
+      DebugLogger.log('Google SignIn', idToken);
+
+      return idToken;
+    } catch (e) {
+      DebugLogger.log('Google SignIn', 'Error during sign in: $e');
+      return '';
     }
   }
 
@@ -56,22 +85,22 @@ class GoogleSignInService {
   }
 }
 
-class GoogleSignInResult {
+class GoogleSignUpResult {
   final bool success;
   final String message;
-  final _GoogleSigInPayload? payload;
-  GoogleSignInResult({
+  final _GoogleSignUpPayload? payload;
+  GoogleSignUpResult({
     required this.success,
     required this.message,
     this.payload,
   });
 }
 
-class _GoogleSigInPayload {
+class _GoogleSignUpPayload {
   final String googleId;
   final String email;
 
-  _GoogleSigInPayload({
+  _GoogleSignUpPayload({
     required this.googleId,
     required this.email,
   });

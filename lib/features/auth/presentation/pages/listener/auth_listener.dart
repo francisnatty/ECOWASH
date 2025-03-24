@@ -1,3 +1,4 @@
+import 'package:ecowash/features/auth/presentation/pages/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,16 +8,27 @@ import '../../sm/auth_state.dart';
 class AuthListener extends StatefulWidget {
   final Widget authenticatedRoute;
   final Widget unauthenticatedRoute;
-  const AuthListener(
-      {super.key,
-      required this.authenticatedRoute,
-      required this.unauthenticatedRoute});
+  const AuthListener({
+    super.key,
+    required this.authenticatedRoute,
+    required this.unauthenticatedRoute,
+  });
 
   @override
   State<AuthListener> createState() => _AuthListenerState();
 }
 
 class _AuthListenerState extends State<AuthListener> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        context.read<AuthCubit>().checkAuthStatus();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthCubit, AuthState>(
@@ -29,11 +41,7 @@ class _AuthListenerState extends State<AuthListener> {
         builder: (context, state) {
           switch (state.status) {
             case AuthStatus.initial:
-              return const Scaffold(
-                body: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
+              return const SplashScreen();
             case AuthStatus.authenticated:
               return widget.authenticatedRoute;
             case AuthStatus.unauthenticated:

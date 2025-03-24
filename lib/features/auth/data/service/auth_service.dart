@@ -12,9 +12,15 @@ import '../requests/login_payload.dart';
 import '../requests/phone_signin_payload.dart';
 
 abstract class AuthService {
-  Future<ApiResponse> phoneSignIn({required PhoneSignInPayload paylad});
-  Future<ApiResponse> googleSigIn({required GoogleSigInPayload payload});
-  Future<ApiResponse> appleSignIn({required AppleSignInPayload payload});
+  Future<ApiResponse> phoneSignUp({required PhoneSignInPayload paylad});
+  Future<ApiResponse> googleSignUp({required GoogleSigInPayload payload});
+  Future<ApiResponse> appleSignUp({required AppleSignInPayload payload});
+
+  Future<ApiResponse> googleSignIn({required String googleIdToken});
+  Future<ApiResponse> apppleSignIn({required String appleIdToken});
+
+  Future<ApiResponse> forgotPassword({required String phoneNumber});
+
   Future<ApiResponse> login({required LoginPayload payload});
   Future<ApiResponse> changePassword({required ChangePasswordPayload payload});
   Future<ApiResponse> verifyOtp({required String phone, required String code});
@@ -26,7 +32,7 @@ class AuthServiceImpl implements AuthService {
   final localStorage = Di.getIt<LocalStorage>();
   // final apiRequest=
   @override
-  Future<ApiResponse> appleSignIn({required AppleSignInPayload payload}) async {
+  Future<ApiResponse> appleSignUp({required AppleSignInPayload payload}) async {
     final response = await apiClient.request(
       path: ApiEndpoints.appleSigning,
       method: MethodType.post,
@@ -47,9 +53,11 @@ class AuthServiceImpl implements AuthService {
   }
 
   @override
-  Future<ApiResponse> googleSigIn({required GoogleSigInPayload payload}) async {
+  Future<ApiResponse> googleSignUp(
+      {required GoogleSigInPayload payload}) async {
     final response = await apiClient.request(
-      path: ApiEndpoints.googleSignin,
+      path:
+          'https://echowash-backend-966541614788.us-central1.run.app/auth/signup/google',
       method: MethodType.post,
       payload: payload.toJson(),
     );
@@ -71,7 +79,7 @@ class AuthServiceImpl implements AuthService {
   }
 
   @override
-  Future<ApiResponse> phoneSignIn({required PhoneSignInPayload paylad}) async {
+  Future<ApiResponse> phoneSignUp({required PhoneSignInPayload paylad}) async {
     final response = await apiClient.request(
       // path: ApiEndpoints.phoneSignup,
       path:
@@ -104,5 +112,35 @@ class AuthServiceImpl implements AuthService {
     print(response.data);
 
     return response;
+  }
+
+  @override
+  Future<ApiResponse> apppleSignIn({required String appleIdToken}) async {
+    final response = await apiClient.request(
+        path:
+            'https://echowash-backend-966541614788.us-central1.run.app/auth/signin/apple',
+        method: MethodType.post,
+        payload: {"appleIdToken": appleIdToken});
+
+    return response;
+  }
+
+  @override
+  Future<ApiResponse> googleSignIn({required String googleIdToken}) async {
+    final response = await apiClient.request(
+        path:
+            'https://echowash-backend-966541614788.us-central1.run.app/auth/signin/google',
+        method: MethodType.post,
+        payload: {
+          "googleIdToken": googleIdToken,
+        });
+
+    return response;
+  }
+
+  @override
+  Future<ApiResponse> forgotPassword({required String phoneNumber}) async {
+    // TODO: implement forgotPassword
+    throw UnimplementedError();
   }
 }

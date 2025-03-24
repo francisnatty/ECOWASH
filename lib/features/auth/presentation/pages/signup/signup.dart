@@ -1,11 +1,10 @@
-import 'package:ecowash/core/utils/constants/app_constants.dart';
 import 'package:ecowash/core/utils/utils.dart';
 import 'package:ecowash/core/widgets/wwidgets.dart';
 import 'package:ecowash/features/auth/data/requests/google_signin_payload.dart';
+import 'package:ecowash/features/auth/data/service/apple_service.dart';
 import 'package:ecowash/features/auth/data/service/google_service.dart';
 import 'package:ecowash/features/auth/presentation/pages/login/login.dart';
-import 'package:ecowash/features/auth/presentation/pages/signup/otp_verification.dart';
-import 'package:ecowash/features/auth/presentation/pages/signup/phone_number_signin.dart';
+import 'package:ecowash/features/auth/presentation/pages/signup/phone_number_signup.dart';
 import 'package:ecowash/features/auth/presentation/sm/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,16 +18,16 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final GoogleSignInService _signInService = GoogleSignInService();
+  final AppleSignInService _appleSignInService = AppleSignInService();
 
-  Future<void> _googleSignIn() async {
+  Future<void> _googleSignUp() async {
     final authProvider = Provider.of<AuthProvider>(
       context,
       listen: false,
     );
 
-    final result = await _signInService.signIn();
+    final result = await _signInService.signUp();
     if (result.success || result.payload == null) {
-      print('true');
       final payload = GoogleSigInPayload(
         googleId: result.payload!.googleId,
         email: result.payload!.email,
@@ -36,7 +35,23 @@ class _SignUpState extends State<SignUp> {
       );
       DebugLogger.log('params', payload.toString());
       if (!mounted) return;
-      await authProvider.googleSignIn(context: context, payload: payload);
+      await authProvider.googleSignUp(context: context, payload: payload);
+    }
+  }
+
+  Future<void> _googleSignIn() async {
+    final authProvider = Provider.of<AuthProvider>(
+      context,
+      listen: false,
+    );
+    final token = await _signInService.signIn();
+    if (token.isNotEmpty) {
+      if (!mounted) return;
+
+      await authProvider.googleSignIn(
+        context: context,
+        googleIdToken: token,
+      );
     }
   }
 
@@ -80,6 +95,7 @@ class _SignUpState extends State<SignUp> {
                   const SizedBox(height: 30),
                   AppButtons.iconButton(
                     onPressed: () async {
+                      //   await _googleSignUp();
                       await _googleSignIn();
                     },
                     title: 'Continue with Google',
@@ -98,9 +114,13 @@ class _SignUpState extends State<SignUp> {
                   const SizedBox(height: 20),
                   AppButtons.primary(
                     onPressed: () {
+                      // goTo(
+                      //   context: context,
+                      //   newScreen: const PhoneNumberSignUp() ,
+                      // );
                       goTo(
                         context: context,
-                        newScreen: const PhoneNumberSignUp(),
+                        newScreen: const LoginScreen(),
                       );
                     },
                     title: 'Login to account',
@@ -116,10 +136,18 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ),
                       const SizedBox(width: 10),
-                      Text(
-                        'Create Account',
-                        style: AppTextStyles.bodyLarge.copyWith(
-                          color: AppColors.primary,
+                      InkWell(
+                        onTap: () {
+                          goTo(
+                            context: context,
+                            newScreen: const PhoneNumberSignUp(),
+                          );
+                        },
+                        child: Text(
+                          'Create Account',
+                          style: AppTextStyles.bodyLarge.copyWith(
+                            color: AppColors.primary,
+                          ),
                         ),
                       ),
                     ],

@@ -1,11 +1,15 @@
 import 'package:ecowash/core/widgets/wwidgets.dart';
+import 'package:ecowash/features/auth/data/requests/apple_signin_payload.dart';
 import 'package:ecowash/features/auth/presentation/pages/login/login.dart';
 import 'package:ecowash/features/auth/presentation/sm/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/utils/utils.dart';
+import '../../../data/requests/google_signin_payload.dart';
 import '../../../data/requests/phone_signin_payload.dart';
+import '../../../data/service/apple_service.dart';
+import '../../../data/service/google_service.dart';
 import '../../widgets/design_widget.dart';
 import '../../widgets/phone_num_textfield.dart';
 
@@ -19,6 +23,8 @@ class PhoneNumberSignUp extends StatefulWidget {
 class _PhoneNumberSignUpState extends State<PhoneNumberSignUp> {
   TextEditingController phonecontroller = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final GoogleSignInService _signInService = GoogleSignInService();
+  final AppleSignInService _appleSignInService = AppleSignInService();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool _obsecurePassword = true;
   @override
@@ -26,6 +32,44 @@ class _PhoneNumberSignUpState extends State<PhoneNumberSignUp> {
     phonecontroller.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  Future<void> _googleSignUp() async {
+    final authProvider = Provider.of<AuthProvider>(
+      context,
+      listen: false,
+    );
+
+    final result = await _signInService.signUp();
+    if (result.success || result.payload == null) {
+      final payload = GoogleSigInPayload(
+        googleId: result.payload!.googleId,
+        email: result.payload!.email,
+        role: 'USER',
+      );
+      DebugLogger.log('params', payload.toString());
+      if (!mounted) return;
+      await authProvider.googleSignUp(context: context, payload: payload);
+    }
+  }
+
+  Future<void> _appleSignUp() async {
+    final authProvider = Provider.of<AuthProvider>(
+      context,
+      listen: false,
+    );
+
+    final result = await _appleSignInService.signUp();
+    if (result.success || result.payload == null) {
+      final payload = AppleSignInPayload(
+        appleId: result.payload!.appleId,
+        email: result.payload!.email,
+        role: 'USER',
+      );
+      DebugLogger.log('params', payload.toString());
+      if (!mounted) return;
+      await authProvider.appleSignUp(context: context, payload: payload);
+    }
   }
 
   @override
@@ -45,7 +89,7 @@ class _PhoneNumberSignUpState extends State<PhoneNumberSignUp> {
                   description:
                       'Fill your information below or register\nwith your social accounts.',
                 ),
-                const Hspacing(height: 30),
+                //  const Hspacing(height: 10),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -60,7 +104,7 @@ class _PhoneNumberSignUpState extends State<PhoneNumberSignUp> {
                       PhoneNumberField(
                         controller: phonecontroller,
                       ),
-                      const Hspacing(height: 20),
+                      const Hspacing(height: 15),
                       Text(
                         'Create Password',
                         style: AppTextStyles.labelLarge.copyWith(
@@ -100,7 +144,7 @@ class _PhoneNumberSignUpState extends State<PhoneNumberSignUp> {
                           )
                         ],
                       ),
-                      const Hspacing(height: 20),
+                      const Hspacing(height: 10),
                       AppButtons.primary(
                         onPressed: () async {
                           if (formKey.currentState!.validate()) {
@@ -120,7 +164,7 @@ class _PhoneNumberSignUpState extends State<PhoneNumberSignUp> {
                         },
                         title: 'Create account',
                       ),
-                      const Hspacing(height: 45),
+                      const Hspacing(height: 30),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -146,6 +190,25 @@ class _PhoneNumberSignUpState extends State<PhoneNumberSignUp> {
                             ),
                           ),
                         ],
+                      ),
+                      const Hspacing(height: 10),
+                      AppButtons.iconButton(
+                        onPressed: () async {
+                          await _googleSignUp();
+                          //  await _googleSignIn();
+                        },
+                        title: 'Continue with Google',
+                        icon: AppIcons.gogle,
+                        bgColor: AppColors.surfaceContainer,
+                        textColor: AppColors.onSecondaryContainer,
+                      ),
+                      const SizedBox(height: 20),
+                      AppButtons.iconButton(
+                        onPressed: () {},
+                        title: 'Continue with Apple',
+                        icon: AppIcons.apple,
+                        bgColor: AppColors.surfaceContainer,
+                        textColor: AppColors.onSecondaryContainer,
                       ),
                     ],
                   ),

@@ -6,6 +6,7 @@ import 'package:ecowash/features/app/presentation/sm/geolocation/geolocation_pro
 import 'package:ecowash/features/auth/presentation/pages/listener/auth_listener.dart';
 import 'package:ecowash/features/auth/presentation/pages/login/login.dart';
 import 'package:ecowash/features/auth/presentation/pages/signup/signup.dart';
+import 'package:ecowash/features/auth/presentation/pages/splash/splash_screen.dart';
 import 'package:ecowash/features/auth/presentation/sm/auth_cubit.dart';
 import 'package:ecowash/features/auth/presentation/sm/auth_provider.dart';
 import 'package:ecowash/test.dart';
@@ -15,7 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'features/auth/presentation/pages/signup/otp_verification.dart';
-import 'features/auth/presentation/pages/signup/phone_number_signin.dart';
+import 'features/auth/presentation/pages/signup/phone_number_signup.dart';
 import 'firebase_options.dart';
 import 'core/di/service_locator.dart';
 
@@ -50,11 +51,7 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (context) {
-                final authCubit = getIt<AuthCubit>();
-                authCubit.checkAuthStatus();
-                return authCubit;
-              },
+              create: (context) => getIt<AuthCubit>(),
             ),
             BlocProvider(
               create: (context) => getIt<CollectionBloc>(),
@@ -73,12 +70,11 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
-            //  home: const PhoneNumberSignin(),
+
             home: const AuthListener(
               authenticatedRoute: HomeNav(),
               unauthenticatedRoute: SignUp(),
             ),
-            // home: const TestScreen(),
           ),
         );
       },

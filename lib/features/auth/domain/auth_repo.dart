@@ -11,9 +11,13 @@ import '../data/requests/login_payload.dart';
 import '../data/requests/phone_signin_payload.dart';
 
 abstract class AuthRepo {
-  ApiResult<String> phoneSignIn({required PhoneSignInPayload payload});
-  ApiResult<String> googleSigIn({required GoogleSigInPayload payload});
-  ApiResult<bool> appleSignIn({required AppleSignInPayload payload});
+  ApiResult<String> phoneSignUp({required PhoneSignInPayload payload});
+  ApiResult<String> googleSignUp({required GoogleSigInPayload payload});
+  ApiResult<bool> appleSignUp({required AppleSignInPayload payload});
+
+  ApiResult<String> googleSignIn({required String googleIdToken});
+  ApiResult<String> apppleSignIn({required String appleIdToken});
+
   ApiResult<String> login({required LoginPayload payload});
   ApiResult<String> changePassword({required ChangePasswordPayload payload});
   ApiResult<String> verifyOtp({required String phone, required String otp});
@@ -25,7 +29,7 @@ class AuthRepoImpl implements AuthRepo {
   final localStorage = Di.getIt<LocalStorage>();
 
   @override
-  ApiResult<bool> appleSignIn({required AppleSignInPayload payload}) async {
+  ApiResult<bool> appleSignUp({required AppleSignInPayload payload}) async {
     throw UnimplementedError();
   }
 
@@ -43,11 +47,12 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  ApiResult<String> googleSigIn({required GoogleSigInPayload payload}) async {
-    final response = await authService.googleSigIn(payload: payload);
+  ApiResult<String> googleSignUp({required GoogleSigInPayload payload}) async {
+    final response = await authService.googleSignUp(payload: payload);
     DebugLogger.log('GoogleSignIn', response.rawJson);
     if (response.success!) {
       final String message = response.rawJson['message'];
+      await localStorage.saveAcessToken(response.rawJson['data']['token']);
       return Right(message);
     } else {
       return Left(response.failure!);
@@ -68,8 +73,8 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  ApiResult<String> phoneSignIn({required PhoneSignInPayload payload}) async {
-    final response = await authService.phoneSignIn(paylad: payload);
+  ApiResult<String> phoneSignUp({required PhoneSignInPayload payload}) async {
+    final response = await authService.phoneSignUp(paylad: payload);
     DebugLogger.log('PhoneSignIn', response.rawJson);
     if (response.success!) {
       final String message = response.rawJson['message'];
@@ -91,6 +96,34 @@ class AuthRepoImpl implements AuthRepo {
     DebugLogger.log('VERIFY OTP', response.rawJson);
     if (response.success!) {
       final String message = response.rawJson['message'];
+      return Right(message);
+    } else {
+      return Left(response.failure!);
+    }
+  }
+
+  @override
+  ApiResult<String> apppleSignIn({required String appleIdToken}) async {
+    final response = await authService.apppleSignIn(appleIdToken: appleIdToken);
+    DebugLogger.log('APPLE SIGNIN API', response.rawJson);
+
+    if (response.success!) {
+      final String message = response.rawJson['message'];
+      return Right(message);
+    } else {
+      return Left(response.failure!);
+    }
+  }
+
+  @override
+  ApiResult<String> googleSignIn({required String googleIdToken}) async {
+    final response =
+        await authService.googleSignIn(googleIdToken: googleIdToken);
+    DebugLogger.log('GOOGLE SIGNIN API', response.rawJson);
+
+    if (response.success!) {
+      final String message = response.rawJson['message'];
+      await localStorage.saveAcessToken(response.rawJson['data']['token']);
       return Right(message);
     } else {
       return Left(response.failure!);

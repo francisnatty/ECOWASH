@@ -1,6 +1,6 @@
 import 'package:ecowash/features/app/presentation/pages/nav.dart';
 import 'package:ecowash/features/auth/data/requests/login_payload.dart';
-import 'package:ecowash/features/auth/presentation/pages/signup/phone_number_signin.dart';
+import 'package:ecowash/features/auth/presentation/pages/signup/phone_number_signup.dart';
 import 'package:ecowash/features/auth/presentation/sm/auth_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

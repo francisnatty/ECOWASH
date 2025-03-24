@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/utils/animations/transition_animations.dart';
 import '../../../app/presentation/pages/profile/screens/change_password.dart';
+import '../../data/requests/apple_signin_payload.dart';
 import '../../data/requests/change_password_payload.dart';
 import '../../data/requests/google_signin_payload.dart';
 import '../../data/requests/login_payload.dart';
@@ -95,7 +96,7 @@ class AuthProvider extends ChangeNotifier {
     _setLoading(true);
     LoadingDialog.show(context);
 
-    final response = await authRepo.phoneSignIn(payload: payload);
+    final response = await authRepo.phoneSignUp(payload: payload);
     response.fold(
       (failure) {
         LoadingDialog.hide(context);
@@ -131,11 +132,11 @@ class AuthProvider extends ChangeNotifier {
     );
   }
 
-  Future<void> googleSignIn(
+  Future<void> googleSignUp(
       {required BuildContext context,
       required GoogleSigInPayload payload}) async {
     LoadingDialog.show(context);
-    final response = await authRepo.googleSigIn(payload: payload);
+    final response = await authRepo.googleSignUp(payload: payload);
     response.fold(
       (failure) {
         LoadingDialog.hide(context);
@@ -152,10 +153,49 @@ class AuthProvider extends ChangeNotifier {
           message: successMsg,
           toastType: ToastType.success,
         );
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          goToAndRemove(
+            context: context,
+            newScreen: const HomeNav(),
+          );
+        });
       },
     );
   }
 
+  Future<void> googleSignIn(
+      {required BuildContext context, required String googleIdToken}) async {
+    LoadingDialog.show(context);
+    final response = await authRepo.googleSignIn(googleIdToken: googleIdToken);
+    response.fold(
+      (failure) {
+        LoadingDialog.hide(context);
+        ToastUtil.show(
+          context,
+          message: failure.message,
+          toastType: ToastType.error,
+        );
+      },
+      (successMsg) {
+        LoadingDialog.hide(context);
+        ToastUtil.show(
+          context,
+          message: successMsg,
+          toastType: ToastType.success,
+        );
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          goToAndRemove(
+            context: context,
+            newScreen: const HomeNav(),
+          );
+        });
+      },
+    );
+  }
+
+  Future<void> appleSignUp(
+      {required BuildContext context,
+      required AppleSignInPayload payload}) async {}
   Future<void> changePassword(
       {required BuildContext context,
       required ChangePasswordPayload payload}) async {

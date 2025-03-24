@@ -47,6 +47,8 @@ class AppIcons {
 
   static const String testHeader = '${_path}test_header.svg';
   static const String testFooter = '${_path}test_footer.svg';
+
+  static const String splashDesign = '${_path}splash_design.svg';
 }
 
 class AppImages {
@@ -66,4 +68,5 @@ class AppImages {
   static const String pressingIron = '${_path}pressing_iron.png';
   static const String walletBg = '${_path}wallet_bg.jpg';
   static const onbBg = '${_path}onb_bg.png';
+  static const String splashLogo = '${_path}splash_logo.png';
 }
