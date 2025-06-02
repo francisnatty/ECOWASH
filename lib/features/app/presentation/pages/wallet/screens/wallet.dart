@@ -33,84 +33,7 @@ class _WalletScState extends State<WalletSc> {
               //   ),
               // ),
               const Hspacing(height: 35),
-              Container(
-                padding: AppPaddings.all10,
-                height: 171.h,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    image: const DecorationImage(
-                      image: AssetImage(
-                        AppImages.walletBg,
-                      ),
-                      fit: BoxFit.cover,
-                    )
-                    // color: AppColors.onPrimaryContainer,
-                    ),
-                child: Column(
-                  children: [
-                    Text(
-                      'Ecowash Wallet',
-                      style: AppTextStyles.labelSmall.copyWith(
-                        color: AppColors.materialThemeWhite,
-                      ),
-                    ),
-                    const Hspacing(height: 3),
-                    Text(
-                      '0012334560',
-                      style: AppTextStyles.titleMedium.copyWith(
-                        color: AppColors.materialThemeWhite,
-                      ),
-                    ),
-                    const Hspacing(height: 10),
-                    Text(
-                      'N 54,000.00',
-                      style: AppTextStyles.displaySmall.copyWith(
-                        color: AppColors.primaryContainer,
-                      ),
-                    ),
-                    const Hspacing(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              'Show Balance',
-                              style: AppTextStyles.bodySmallest.copyWith(
-                                color: AppColors.materialThemeWhite,
-                              ),
-                            ),
-                            const Wspacing(width: 5),
-                            const SvgIcon(
-                              icon: AppIcons.eye,
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            SizedBox(
-                              height: 20.h,
-                              width: 20.w,
-                              child: Image.asset(
-                                AppImages.weQuickPayLogo,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            const Wspacing(width: 10),
-                            Text(
-                              'WeQuickPay',
-                              style: AppTextStyles.labelMedium.copyWith(
-                                color: AppColors.materialThemeWhite,
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
+              WalletContainerWidget(),
               const Hspacing(height: 15),
               Row(
                 children: [
@@ -163,6 +86,94 @@ class _WalletScState extends State<WalletSc> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class WalletContainerWidget extends StatelessWidget {
+  const WalletContainerWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: AppPaddings.all10,
+      height: 171.h,
+      width: double.infinity,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          image: const DecorationImage(
+            image: AssetImage(
+              AppImages.walletBg,
+            ),
+            fit: BoxFit.cover,
+          )
+          // color: AppColors.onPrimaryContainer,
+          ),
+      child: Column(
+        children: [
+          Text(
+            'Ecowash Wallet',
+            style: AppTextStyles.labelSmall.copyWith(
+              color: AppColors.materialThemeWhite,
+            ),
+          ),
+          const Hspacing(height: 3),
+          Text(
+            '0012334560',
+            style: AppTextStyles.titleMedium.copyWith(
+              color: AppColors.materialThemeWhite,
+            ),
+          ),
+          const Hspacing(height: 10),
+          Text(
+            'N 54,000.00',
+            style: AppTextStyles.displaySmall.copyWith(
+              color: AppColors.primaryContainer,
+            ),
+          ),
+          const Hspacing(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    'Show Balance',
+                    style: AppTextStyles.bodySmallest.copyWith(
+                      color: AppColors.materialThemeWhite,
+                    ),
+                  ),
+                  const Wspacing(width: 5),
+                  const SvgIcon(
+                    icon: AppIcons.eye,
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    height: 20.h,
+                    width: 20.w,
+                    child: Image.asset(
+                      AppImages.weQuickPayLogo,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const Wspacing(width: 10),
+                  Text(
+                    'WeQuickPay',
+                    style: AppTextStyles.labelMedium.copyWith(
+                      color: AppColors.materialThemeWhite,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          )
+        ],
       ),
     );
   }

@@ -108,7 +108,6 @@ class _LaundryScreenState extends State<LaundryScreen> {
           SliverPadding(
             padding: AppPaddings.all16,
             sliver: SliverToBoxAdapter(
-              
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

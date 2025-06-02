@@ -10,7 +10,7 @@ abstract class GeolocationService {
   Future<ApiResponse> getCurrentLocation();
   Future<ApiResponse> getLocationHistory();
   Future<ApiResponse> updateLocation({required LocationPayload payload});
-  Future<ApiResponse<SupportedLocationsModel>> getSupportedLocations();
+  Future<ApiResponse<SupportedLocationModel>> getSupportedLocations();
   Future<ApiResponse> checkIfLocationIsSupported();
 }
 
@@ -41,14 +41,14 @@ class GeolocationServiceImpl implements GeolocationService {
   }
 
   @override
-  Future<ApiResponse<SupportedLocationsModel>> getSupportedLocations() async {
+  Future<ApiResponse<SupportedLocationModel>> getSupportedLocations() async {
     String? token = await localStorage.getAcessToken();
     apiClient.setToken(token!);
 
     final response = await apiClient.request(
       path: 'location/supported',
       method: MethodType.get,
-      fromJsonT: (json) => SupportedLocationsModel.fromJson(json),
+      fromJsonT: (json) => SupportedLocationModel.fromJson(json),
     );
 
     return response;

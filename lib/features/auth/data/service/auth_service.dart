@@ -10,6 +10,7 @@ import '../requests/change_password_payload.dart';
 import '../requests/google_signin_payload.dart';
 import '../requests/login_payload.dart';
 import '../requests/phone_signin_payload.dart';
+import '../requests/reset_password_payload.dart';
 
 abstract class AuthService {
   Future<ApiResponse> phoneSignUp({required PhoneSignInPayload paylad});
@@ -20,6 +21,10 @@ abstract class AuthService {
   Future<ApiResponse> apppleSignIn({required String appleIdToken});
 
   Future<ApiResponse> forgotPassword({required String phoneNumber});
+  Future<ApiResponse> resetPassword({required ResetPasswordPayload payload});
+
+  Future<ApiResponse> verifyReseyOtp(
+      {required String number, required String otp});
 
   Future<ApiResponse> login({required LoginPayload payload});
   Future<ApiResponse> changePassword({required ChangePasswordPayload payload});
@@ -140,7 +145,39 @@ class AuthServiceImpl implements AuthService {
 
   @override
   Future<ApiResponse> forgotPassword({required String phoneNumber}) async {
-    // TODO: implement forgotPassword
-    throw UnimplementedError();
+    final response = await apiClient.request(
+        path:
+            'https://echowash-backend-966541614788.us-central1.run.app/auth/forgot-password',
+        method: MethodType.post,
+        payload: {
+          'phone': phoneNumber,
+        });
+
+    return response;
+  }
+
+  @override
+  Future<ApiResponse> resetPassword(
+      {required ResetPasswordPayload payload}) async {
+    final response = await apiClient.request(
+      path:
+          'https://echowash-backend-966541614788.us-central1.run.app/auth/reset-password',
+      method: MethodType.post,
+      payload: payload.toJson(),
+    );
+
+    return response;
+  }
+
+  @override
+  Future<ApiResponse> verifyReseyOtp(
+      {required String number, required String otp}) async {
+    final response = await apiClient.request(
+        path:
+            'https://echowash-backend-966541614788.us-central1.run.app/auth/verify-reset-otp',
+        method: MethodType.post,
+        payload: {'phone': number, 'otp': otp});
+
+    return response;
   }
 }

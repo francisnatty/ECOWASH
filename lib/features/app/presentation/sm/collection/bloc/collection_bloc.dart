@@ -18,9 +18,6 @@ class CollectionBloc extends Bloc<CollectionEvent, CollectionState> {
 
   CollectionBloc() : super(CollectionInitial()) {
     on<GetCollectionsEvent>(_onGetCollections);
-    on<CreateCollectionEvent>(_onCreateCollection);
-    on<UpdateCollectionEvent>(_onUpdateCollection);
-    on<DeleteCollectionEvent>(_onDeleteCollection);
   }
 
   Future<void> _onGetCollections(
@@ -31,40 +28,6 @@ class CollectionBloc extends Bloc<CollectionEvent, CollectionState> {
     result.fold(
       (failure) => emit(CollectionError(error: failure.message)),
       (collections) => emit(CollectionsLoaded(collections: collections)),
-    );
-  }
-
-  Future<void> _onCreateCollection(
-      CreateCollectionEvent event, Emitter<CollectionState> emit) async {
-    emit(CollectionLoading());
-    final result =
-        await collectionRepo.createCollections(payload: event.payload);
-
-    result.fold(
-      (failure) => emit(CollectionError(error: failure.message)),
-      (message) => emit(CollectionActionSuccess(message: message)),
-    );
-  }
-
-  Future<void> _onUpdateCollection(
-      UpdateCollectionEvent event, Emitter<CollectionState> emit) async {
-    emit(CollectionLoading());
-    final result = await collectionRepo.updateCollection(id: event.id);
-
-    result.fold(
-      (failure) => emit(CollectionError(error: failure.message)),
-      (message) => emit(CollectionActionSuccess(message: message)),
-    );
-  }
-
-  Future<void> _onDeleteCollection(
-      DeleteCollectionEvent event, Emitter<CollectionState> emit) async {
-    emit(CollectionLoading());
-    final result = await collectionRepo.deleteCollection(id: event.id);
-
-    result.fold(
-      (failure) => emit(CollectionError(error: failure.message)),
-      (message) => emit(CollectionActionSuccess(message: message)),
     );
   }
 }

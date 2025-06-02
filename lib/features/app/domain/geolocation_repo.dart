@@ -10,7 +10,7 @@ abstract class GeolocationRepo {
   ApiResult<String> getCurrentLocation();
   ApiResult<String> getLocationHistory();
   ApiResult<String> updateLocation({required LocationPayload payload});
-  ApiResult<SupportedLocationsModel> getSupportedLocations();
+  ApiResult<SupportedLocationModel> getSupportedLocations();
   ApiResult<String> checkIfLocationIsSupported();
 }
 
@@ -35,9 +35,15 @@ class GeolocationRepoImpl implements GeolocationRepo {
   }
 
   @override
-  ApiResult<SupportedLocationsModel> getSupportedLocations() {
-    // TODO: implement getSupportedLocations
-    throw UnimplementedError();
+  ApiResult<SupportedLocationModel> getSupportedLocations() async {
+    final response = await service.getSupportedLocations();
+    DebugLogger.log('', response.rawJson);
+    if (response.success!) {
+      final String message = response.rawJson['message'];
+      return Right(response.data!);
+    } else {
+      return Left(response.failure!);
+    }
   }
 
   @override

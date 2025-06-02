@@ -187,6 +187,9 @@ class _ProfileState extends State<Profile> {
                 )
               ],
             ),
+            
+            
+            
             const Hspacing(height: 25),
             Column(
               children: List.generate(profileItems.length, (index) {

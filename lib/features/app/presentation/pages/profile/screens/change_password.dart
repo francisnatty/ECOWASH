@@ -1,11 +1,13 @@
 import 'package:ecowash/core/utils/utils.dart';
-import 'package:ecowash/core/widgets/custom_app_bar.dart';
 import 'package:ecowash/core/widgets/wwidgets.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ChangePassword extends StatefulWidget {
-  const ChangePassword({super.key});
+  final bool? resetPassword;
+  const ChangePassword({
+    super.key,
+    this.resetPassword,
+  });
 
   @override
   State<ChangePassword> createState() => _ChangePasswordState();

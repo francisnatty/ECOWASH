@@ -9,6 +9,7 @@ import '../data/requests/change_password_payload.dart';
 import '../data/requests/google_signin_payload.dart';
 import '../data/requests/login_payload.dart';
 import '../data/requests/phone_signin_payload.dart';
+import '../data/requests/reset_password_payload.dart';
 
 abstract class AuthRepo {
   ApiResult<String> phoneSignUp({required PhoneSignInPayload payload});
@@ -17,6 +18,11 @@ abstract class AuthRepo {
 
   ApiResult<String> googleSignIn({required String googleIdToken});
   ApiResult<String> apppleSignIn({required String appleIdToken});
+
+  ApiResult<String> forgotPassword({required String phoneNumber});
+  ApiResult<String> resetPassword({required ResetPasswordPayload payload});
+  ApiResult<String> verifyReseyOtp(
+      {required String number, required String otp});
 
   ApiResult<String> login({required LoginPayload payload});
   ApiResult<String> changePassword({required ChangePasswordPayload payload});
@@ -124,6 +130,42 @@ class AuthRepoImpl implements AuthRepo {
     if (response.success!) {
       final String message = response.rawJson['message'];
       await localStorage.saveAcessToken(response.rawJson['data']['token']);
+      return Right(message);
+    } else {
+      return Left(response.failure!);
+    }
+  }
+
+  @override
+  ApiResult<String> forgotPassword({required String phoneNumber}) async {
+    final response = await authService.forgotPassword(phoneNumber: phoneNumber);
+    if (response.success!) {
+      final String message = response.rawJson['message'];
+
+      return Right(message);
+    } else {
+      return Left(response.failure!);
+    }
+  }
+
+  @override
+  ApiResult<String> resetPassword(
+      {required ResetPasswordPayload payload}) async {
+    final response = await authService.resetPassword(payload: payload);
+    if (response.success!) {
+      final String message = response.rawJson['message'];
+      return Right(message);
+    } else {
+      return Left(response.failure!);
+    }
+  }
+
+  @override
+  ApiResult<String> verifyReseyOtp(
+      {required String number, required String otp}) async {
+    final response = await authService.verifyReseyOtp(number: number, otp: otp);
+    if (response.success!) {
+      final String message = response.rawJson['message'];
       return Right(message);
     } else {
       return Left(response.failure!);

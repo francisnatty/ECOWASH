@@ -1,20 +1,22 @@
 import 'dart:async';
-
-import 'package:ecowash/features/auth/presentation/pages/login/login.dart';
 import 'package:ecowash/features/auth/presentation/sm/auth_provider.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../../core/utils/utils.dart';
 import '../../../../../core/widgets/wwidgets.dart';
+import '../../../data/requests/reset_password_payload.dart';
 import '../../widgets/design_widget.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   final String phoneNumber;
-  const OtpVerificationScreen({super.key, required this.phoneNumber});
+  final bool? resetPassword;
+  const OtpVerificationScreen({
+    super.key,
+    required this.phoneNumber,
+    this.resetPassword,
+  });
 
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
@@ -53,11 +55,20 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   }
 
   void _resendOtp() {
-    // Implement your OTP resend logic here
-    // For example:
-    // authProvider.sendOtp(phoneNumber: widget.phoneNumber);
-
     _startTimer();
+  }
+
+  void _resetPasswordOTP(
+      {required String newPassword, required String otp}) async {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
+    final payload = ResetPasswordPayload(
+      newPassword: newPassword,
+      confirmPassword: otp,
+      token: widget.phoneNumber,
+    );
+
+    await authProvider.resetPassword(context: context, payload: payload);
   }
 
   @override
@@ -129,8 +140,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     AppButtons.primary(
                       onPressed: () {
                         if (_pinController.text.length == 6) {
-                          print(_pinController.text.toString());
-                          print(widget.phoneNumber);
+                          // if(widget.resetPassword!= null && widget.resetPassword==true){
+                          //   _resetPasswordOTP(newPassword: newPassword, otp: otp)
+                          // }
                           authProvider.verifyOtp(
                               context: context,
                               phone: widget.phoneNumber,

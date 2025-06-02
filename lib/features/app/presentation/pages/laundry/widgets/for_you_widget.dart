@@ -27,6 +27,7 @@ class ForYouWidget extends StatelessWidget {
             ),
           ),
           const Wspacing(width: 5),
+      
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,6 +98,9 @@ class ForYouWidget extends StatelessWidget {
               ],
             ),
           )
+       
+       
+       
         ],
       ),
     );

@@ -4,29 +4,20 @@ import 'package:ecowash/features/app/presentation/pages/nav.dart';
 import 'package:ecowash/features/app/presentation/sm/collection/bloc/collection_bloc.dart';
 import 'package:ecowash/features/app/presentation/sm/geolocation/geolocation_provider.dart';
 import 'package:ecowash/features/auth/presentation/pages/listener/auth_listener.dart';
-import 'package:ecowash/features/auth/presentation/pages/login/login.dart';
 import 'package:ecowash/features/auth/presentation/pages/signup/signup.dart';
-import 'package:ecowash/features/auth/presentation/pages/splash/splash_screen.dart';
 import 'package:ecowash/features/auth/presentation/sm/auth_cubit.dart';
 import 'package:ecowash/features/auth/presentation/sm/auth_provider.dart';
-import 'package:ecowash/test.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'features/auth/presentation/pages/signup/otp_verification.dart';
-import 'features/auth/presentation/pages/signup/phone_number_signup.dart';
 import 'firebase_options.dart';
 import 'core/di/service_locator.dart';
 
 void main() async {
-  Di.setUpLocator();
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
+  Di.setUpLocator();
   runApp(
     DevicePreview(
       enabled: false,
